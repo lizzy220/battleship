@@ -4,7 +4,7 @@ var mongoURI = 'mongodb://ec2-54-175-174-41.compute-1.amazonaws.com:80/'
 var db_name = "5117-individual"
 var db_user = "5117user"
 var db_pswd = "5117pass"
-var x500 = "lixx3524"
+var x500 = "lixx3524";
 MongoClient.connect(mongoURI + db_name, function(err, db){
   if (err) {
     throw err;
