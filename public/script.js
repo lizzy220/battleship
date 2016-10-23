@@ -41,5 +41,11 @@ $(function() {
           }
       });
     });
+//get the boat type
+var text = '0';
+$('.ships li').click(function(){
+alert($(this).text());
+text = $(this).text();
+});
 
 })
