@@ -24,10 +24,10 @@ MongoClient.connect(mongoURI + db_name, function(err, db){
         app.set('view engine', 'ejs')
 
         app.get('/spectator', function(req, res){
-
+              res.render('index')
             })
         app.get('/', function(req, res){
-              res.render('index')
+
             })
 
         app.post('/hit', function(req,res){
