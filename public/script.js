@@ -1,5 +1,9 @@
 var socket = io.connect();
 
+function sendMessage(i, j) {
+      socket.emit(i * 10 + j);
+}
+
 $(function() {
     // draw the grid
     var gridDiv = document.querySelectorAll('.grid');
@@ -15,4 +19,10 @@ $(function() {
         }
       }
     }
+
+    $(".grid-cell").click(function() {
+      var i = this.getAttribute("data-x");
+      var j = this.getAttribute("data-y");
+      sendMessage(parseInt(i), parseInt(j));
+    });
 })
