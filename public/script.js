@@ -36,7 +36,6 @@ $(function() {
       var j = this.getAttribute("data-y");
       sendMessage(parseInt(i), parseInt(j));
     });
-})
 
 //get the boat type
 var text = '0';
@@ -46,8 +45,13 @@ text = $(this).text();
 });
 
 //place the boat in the grid on the client side
-$('.gird-cell grid-cell-').click(function(){
-var x = $(this).attr('data-x');
-var y = $(this).attr('data-y');
-$('.gird-cell grid-cell-' + x + '-' + y).text() = text;
-});
+//$('.gird-cell grid-cell-').click(function(){
+//var x = $(this).attr('data-x');
+//var y = $(this).attr('data-y');
+//$('.gird-cell grid-cell-' + x + '-' + y).text() = text;
+//});
+})
+
+
+
+
