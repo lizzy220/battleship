@@ -141,7 +141,7 @@ button:active {
 	font-size: 2em;
 }
 .grid-cell {
-	vertical-align: top; /*clears the vertical space between rows*/
+	vertical-align: top;
 	height: 40px;
 	width: 40px;
 	display: inline-block;
@@ -159,7 +159,7 @@ button:active {
 	background-color: #99C2E1;
 }
 .computer-player .grid-cell:hover, .computer-player:hover {
-	cursor: url('../img/crosshair.png') 16 16, crosshair;
+	cursor: url('/crosshair.png') 16 16, crosshair;
 }
 .grid-ship, .human-player .grid-ship:hover {
 	background-color: #808080;
