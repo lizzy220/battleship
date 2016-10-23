@@ -16,6 +16,7 @@ var connect = function(callback){
           throw err;
         }
         else {
+          console.log("Connected successfully to mongodb");
           callback(err,db)
         }
       })
