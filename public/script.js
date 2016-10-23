@@ -1,9 +1,5 @@
 var socket = io.connect();
 
-function sendMessage(i, j) {
-      socket.emit(i * 10 + j);
-}
-
 socket.on('message', function(data) {
     var i = data['message'] / 10;
     var j = data['message'] % 10;
@@ -32,8 +28,18 @@ $(function() {
     }
 
     $(".grid-cell").click(function() {
-      var i = this.getAttribute("data-x");
-      var j = this.getAttribute("data-y");
-      sendMessage(parseInt(i), parseInt(j));
+      var i = parseInt(this.getAttribute("data-x"));
+      var j = parseInt(this.getAttribute("data-y"));
+      $.ajax({
+          url: "/hit",
+          type: "post",
+          data: {
+            'location': i * 10 + j,
+          },
+          success: function(data){
+              console.log(i * 10 + j);
+          }
+      });
     });
+
 })
