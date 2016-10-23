@@ -4,6 +4,16 @@ function sendMessage(i, j) {
       socket.emit(i * 10 + j);
 }
 
+socket.on('message', function(data) {
+    var i = data['message'] / 10;
+    var j = data['message'] % 10;
+    if(data[success]){
+        $('.grid-cell-' + i + '-' + j).style.backgroundColor = '#ff6666';
+    }else{
+        $('.grid-cell-' + i + '-' + j).style.backgroundColor = '#99ff66';
+    }
+});
+
 $(function() {
     // draw the grid
     var gridDiv = document.querySelectorAll('.grid');
