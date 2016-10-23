@@ -1,0 +1,50 @@
+<!-- client side used to test our API this project is not required -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Battleship</title>
+    <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="style.css"  media="all"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Battleship Test</h1>
+    </header>
+    <div class="game-container">
+      <div id="left-sidebar">
+  			<h2>Place Your Ships</h2>
+  			<ul class="ships">
+  				<li id="patrolboat">Patrol Boat</li>
+  				<li id="submarine">Submarine</li>
+  				<li id="destroyer">Destroyer</li>
+  				<li id="battleship">Battleship</li>
+  				<li id="carrier">Aircraft Carrier</li>
+  			</ul>
+  			<button id="start-game">Start Game</button>
+        <button id="restart-game">Restart Game</button>
+  		</div>
+
+      <div id="right-sidebar">
+  			<h2>Stats</h2>
+  			<p><b>Games Won</b></p>
+  			<p id="wins">0 of 0</p>
+  			<p><b>Accuracy</b></p>
+  			<p id="accuracy">0%</p>
+  		</div>
+      <div class="grid-container">
+  			<h2>Player</h2>
+  			<div class="grid human-player"><span class="hints">Please enable JavaScript to play this game</span></div>
+  		</div>
+
+  		<div class="grid-container">
+  			<h2>Computer</h2>
+  			<div class="grid computer-player"><span class="hints">Please enable JavaScript to play this game</span></div>
+  		</div>
+  	</div>
+  </div>
+</body>
+</html>
