@@ -16,3 +16,17 @@ $(function() {
       }
     }
 })
+
+//get the boat type
+var text = '0';
+$('.ships li').click(function(){
+alert($(this).text());
+text = $(this).text();
+});
+
+//place the boat in the grid on the client side
+$('.gird-cell grid-cell-').click(function(){
+var x = $(this).attr('data-x');
+var y = $(this).attr('data-y');
+$('.gird-cell grid-cell-' + x + '-' + y).text() = text;
+});
