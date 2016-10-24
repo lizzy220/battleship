@@ -4,7 +4,6 @@ mongo.connect(function(err){
   var express = require('express');
 
   app = express();
-
   app.use(express.static('public')) // We will want this later
   app.set('view engine', 'ejs')
 
