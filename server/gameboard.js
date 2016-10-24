@@ -21,7 +21,7 @@ function RandomGameboard() {
     this.carrier = new RandomShip(5, occupied);
     occupied = occupied.concat(get_ship_positions(this.carrier.position, this.carrier.length, this.carrier.direction));
     this.misses = [];
-    this.hits = [];
+    // this.hits = [];
     // console.log(occupied);
 }
 
@@ -71,14 +71,14 @@ var get_ship_positions = function(position, length, direction) {
 var get_random_position = function(length, direction, occupied) {
     position = -1;
     if (direction == 0) {
-        position = randomIntInc(0, 10) * 10 + randomIntInc(0, 10-length+1);
+        position = randomIntInc(0, 9) * 10 + randomIntInc(0, 9-length+1);
         while (is_valid_position(position, length, direction, occupied) == false) {
-            position = randomIntInc(0, 10) * 10 + randomIntInc(0, 10-length+1);
+            position = randomIntInc(0, 9) * 10 + randomIntInc(0, 9-length+1);
         }
     } else {
-        position = randomIntInc(0, 10-length+1) * 10 + randomIntInc(0, 10);
+        position = randomIntInc(0, 9-length+1) * 10 + randomIntInc(0, 9);
         while (is_valid_position(position, length, direction, occupied) == false) {
-            position = randomIntInc(0, 10-length+1) * 10 + randomIntInc(0, 10);
+            position = randomIntInc(0, 9-length+1) * 10 + randomIntInc(0, 9);
         }
     }
     return position;

@@ -1,12 +1,13 @@
 var socket = io.connect();
 
 socket.on('message', function(data) {
-    var i = data['message'] / 10;
-    var j = data['message'] % 10;
+    var i = data['location'] / 10;
+    var j = data['location'] % 10;
+    var player = data['player'];
     if(data[success]){
-        $('.grid-cell-' + i + '-' + j).style.backgroundColor = '#ff6666';
+        $(player + ' ' + '.grid-cell-' + i + '-' + j).style.backgroundColor = '#ff6666';
     }else{
-        $('.grid-cell-' + i + '-' + j).style.backgroundColor = '#99ff66';
+        $(player + ' ' + '.grid-cell-' + i + '-' + j).style.backgroundColor = '#99ff66';
     }
 });
 
@@ -27,7 +28,7 @@ $(function() {
       }
     }
 
-    $(".grid-cell").click(function() {
+    $(".computer-player .grid-cell").click(function() {
       var i = parseInt(this.getAttribute("data-x"));
       var j = parseInt(this.getAttribute("data-y"));
       $.ajax({
