@@ -19,7 +19,6 @@ app.get('/', function(req, res){
 app.get('/test', function(req, res){
     var ai = new AI();
    for(var i = 0; i < 10; i++){
-      console.log(i);
       ai.aiNextMove();
    }
 })
