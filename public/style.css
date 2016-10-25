@@ -40,6 +40,16 @@ button:active {
 	background-color: #99C2E1;
 }
 
+.register {
+	width: 800px;
+	text-align: center;
+	margin: 400px auto 100px auto;
+}
+
+#username {
+        width: 600px;
+        padding: 10px 10px;
+}
 
 .container {
 	width: 870px;

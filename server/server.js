@@ -42,6 +42,16 @@ app.get('/test', function(req, res){
 })
 
 var io = require('socket.io').listen(server);
+io.sockets.on('connection', function(socket){
+  socket.on('username', function(data){ //insert username to db
+     var insertUser = function(err,db){
+        db.collection('lixx3524_messages').insert(data, function(err, ids){});
+        db.close();
+     }
+     mongo.connect(insertUser);
+  })
+})
+
 app.post('/hit', function(req,res){
     var location = req.body.location;
     votes[location]++;
