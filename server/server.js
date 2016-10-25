@@ -1,11 +1,29 @@
-var mongo = require('./mongo_connection')
+var mongo = require('./mongo_connection');
+var bodyParser  = require('body-parser');
+var AI = require('./ai');
+
 // Everything that was in the file before goes here
 var express = require('express');
-
 app = express();
-
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
+var port = process.env.PORT || 3000; // For when we deploy to Heroku
+var server = app.listen(port)
 var votes = [];
-var AI = require('./ai');
+
+//-------------Example for use database-------------
+// var findMessages = function(err,db) {
+//   assert.equal(null, err);
+//   db.collection('lixx3524_messages').find().toArray(function(err, docs) {
+//     assert.equal(null, err);
+//     // for(index in docs){
+//       console.log(docs);
+//     // }
+//   });
+//   db.close();
+// }
+// mongoUtil.connect(findMessages);
+//-----------------------end--------------------------
 
 app.use(express.static('public')) // We will want this later
 app.set('view engine', 'ejs')
@@ -23,12 +41,17 @@ app.get('/test', function(req, res){
    }
 })
 
+var io = require('socket.io').listen(server);
 app.post('/hit', function(req,res){
-    var location = req.param('location');
+    var location = req.body.location;
     votes[location]++;
+    // io.sockets.on('connection', function (socket) {
+    io.sockets.emit('message', location);
+    // })
+    console.log(location);
     res.json({
       'success':  true,
-      'message':  '',
+      'message':  req.body,
     })
 })
 
@@ -38,14 +61,6 @@ app.post('/place_ship', function(req,res){
     })
 })
 
-var port = process.env.PORT || 3000; // For when we deploy to Heroku
-
-var server = app.listen(port)
-
-var io = require('socket.io').listen(server);
-io.sockets.on('connection', function (socket) {
-
-})
 
 function vote(){
     var voteLocation = 0;

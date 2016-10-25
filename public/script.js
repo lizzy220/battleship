@@ -4,11 +4,13 @@ socket.on('message', function(data) {
     var i = data['location'] / 10;
     var j = data['location'] % 10;
     var player = data['player'];
-    if(data[success]){
-        $(player + ' ' + '.grid-cell-' + i + '-' + j).style.backgroundColor = '#ff6666';
-    }else{
-        $(player + ' ' + '.grid-cell-' + i + '-' + j).style.backgroundColor = '#99ff66';
-    }
+    $(player + ' ' + '.grid-cell-' + i + '-' + j).css('background-color', '#ff6666');
+    console.log(data);
+    // if(data[success]){
+    //     $(player + ' ' + '.grid-cell-' + i + '-' + j).style.backgroundColor = '#ff6666';
+    // }else{
+    //     $(player + ' ' + '.grid-cell-' + i + '-' + j).style.backgroundColor = '#99ff66';
+    // }
 });
 
 $(function() {
