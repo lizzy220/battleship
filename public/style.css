@@ -174,3 +174,10 @@ button:active {
 .grid-ship, .human-player .grid-ship:hover {
 	background-color: #808080;
 }
+.log{
+	width: 150px;
+	height: 400px;
+	border: 5px solid #666666;
+	border-radius: 5px;
+	background-color: white;
+}
