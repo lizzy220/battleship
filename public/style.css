@@ -160,6 +160,7 @@ button:active {
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
+	background: Heat.png
 }
 .grid-cell:hover {
 	cursor: pointer;
@@ -169,7 +170,7 @@ button:active {
 	background-color: #99C2E1;
 }
 .computer-player .grid-cell:hover, .computer-player:hover {
-	/*cursor: url('/crosshair.png') 16 16, crosshair;*/
+	cursor: url('/crosshair.png') 16 16, crosshair;
 }
 .grid-ship, .human-player .grid-ship:hover {
 	background-color: #808080;

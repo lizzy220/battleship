@@ -119,7 +119,7 @@ function turnBaseRoutine() {
         var result;
         if (nextTurn == 'player') {
             nextTurn = 'computer';
-            retult = playerTurn();
+            result = playerTurn();
         } else {
             result = computerTurn();
             nextTurn = 'player';
@@ -134,7 +134,7 @@ function turnBaseRoutine() {
 
 function playerTurn() {
     playerMove = vote(); // collect players move
-    ai.hit(playerMove);
+    ai.hit(playerMove, ai.aiBoard);
     winner = ai.winner();
     return {'gameboard' : ai.aiBoard,
             'gameboardName' : 'computer-player',

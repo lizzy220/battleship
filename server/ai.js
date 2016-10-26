@@ -20,9 +20,6 @@ var AI = function() {
         }
     };
     this.aiNextMove = function(){
-        // var nextLoc = this.bsCPUplayer.move(false, 0, 0);
-        // console.log(nextLoc);
-        // return nextLoc;
         var nextLoc = this.computerPlayer.fireAtBestPosition();
         console.log(nextLoc);
         return nextLoc;
