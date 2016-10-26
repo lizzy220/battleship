@@ -46,7 +46,7 @@ button:active {
 	margin: 400px auto 100px auto;
 }
 
-#username {
+.Uname {
         width: 600px;
         padding: 10px 10px;
 }

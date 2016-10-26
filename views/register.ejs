@@ -1,0 +1,22 @@
+<!-- client side used to test our API this project is not required -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Battleship</title>
+    <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="style.css"  media="all"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+  <div class="register">
+    <h1>Battleship</h1>
+    <form action="/setUsername" method="post">
+      <p>Please enter player name</p>
+      <input type="text" name="username" class="Uname">
+      <button type='submit'>Start</button>
+    </form>
+  </div>
+</body>
+</html>
