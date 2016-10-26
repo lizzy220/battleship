@@ -158,7 +158,7 @@ function bsCPUplayer(){
    }
 
    this._enemyGrid[this.lastShot.y][this.lastShot.x] = this.SHOT_FIRED;
-   return this.lastShot.x * 10 + this.lastShot.y;
+   return this.lastShot.y * 10 + this.lastShot.x;
   },
 
   /**
