@@ -40,6 +40,18 @@ function refreshShip(ship, classPrefix){
 }
 
 $(function() {
+    //hide the game board, set a username to play
+    $(".container").hide();
+    $("#start").click(function() {
+        if($('#username').val()!="") {
+         socket.emit('username', $('#username').val());
+         $(".container").show();
+         $(".register").hide();
+         }
+         else {
+         alert('please enter a username!');
+         }
+    });
     // draw the grid
     var gridDiv = document.querySelectorAll('.grid');
     for (var grid = 0; grid < gridDiv.length; grid++) {
