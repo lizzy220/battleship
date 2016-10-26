@@ -37,15 +37,15 @@ app.get('/', function(req, res){
     })
 
 var io = require('socket.io').listen(server);
-io.sockets.on('connection', function(socket){
-  socket.on('username', function(data){ //insert username to db
-     var insertUser = function(err,db){
-        db.collection('lixx3524_messages').insert(data, function(err, ids){});
-        db.close();
-     }
-     mongo.connect(insertUser);
-  })
-})
+// io.sockets.on('connection', function(socket){
+//   socket.on('username', function(data){ //insert username to db
+//      var insertUser = function(err,db){
+//         db.collection('lixx3524_messages').insert(data, function(err, ids){});
+//         db.close();
+//      }
+//      mongo.connect(insertUser);
+//   })
+// })
 
 app.post('/hit', function(req,res){
     var location = req.body.location;
@@ -95,5 +95,13 @@ setInterval(function(){
                 'gameboardName' : 'computer-player',
                 'winner': winner};
     io.sockets.emit('message', data);
-    console.log('hit');
-}, 1000 * 10);
+    console.log('palyer');
+
+    var nextMove = ai.aiNextMove();
+    ai.hit(nextMove, ai.playerBoard);
+    winner = ai.winner();
+    data = {'gameboard' : ai.playerBoard,
+            'gameboardName' : 'human-player',
+            'winner': winner};
+    io.sockets.emit('message', data);
+}, 1000 * 2);

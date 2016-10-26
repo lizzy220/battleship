@@ -45,7 +45,7 @@ function hitShip(ship, pos, gameboard){
     }
     if(ship.hit == (1 << ship.length) - 1){
         ship.status = 'sunk';
-        gameborad.aliveShipNum--;
+        gameboard.aliveShipNum--;
     }
     return hit;
 }
