@@ -43,15 +43,10 @@ app.get('/', function(req, res){
 
 var io = require('socket.io').listen(server);
 io.sockets.on('connection', function(socket){
-  // socket.on('username', function(data){ //insert username to db
-  //   socket.username = data
-  //   // console.log(data);
-  //   // var insertUser = function(err,db){
-  //   //   db.collection('userinfo').insert({'username':data});
-  //   //   db.close();
-  //   // }
-  //   // mongo.connect(insertUser);
-  // })
+  socket.on('username', function(data){ //insert username to db
+    // socket.username = data;
+    insertdb('userinfo', {'username':data});
+  })
   socket.on('newlog', function(data){
     // var mes = {'username': socket.username, 'pos': data};
     socket.broadcast.emit('newlog', data);
@@ -83,8 +78,16 @@ app.post('/hit', function(req,res){
       'message':  req.body,
     })
 })
-
-
+//using this function to insert data to database
+//collection param is the collection you want to insert
+//record param: the record you need to insert such as {'username': 'test2'}
+function insertdb(collection, record){
+  var insertUser = function(err,db){
+    db.collection(collection).insert(record);
+    db.close();
+  }
+  mongo.connect(insertUser);
+}
 
 function vote(){
     var voteLocation = -1;
