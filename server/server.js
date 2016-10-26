@@ -120,5 +120,5 @@ function setTurnBase(){
               'gameboardName' : 'human-player',
               'winner': winner};
       io.sockets.emit('message', data);
-  }, 1000 * 1);
+  }, 50);
 }
