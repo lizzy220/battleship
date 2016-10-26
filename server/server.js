@@ -53,13 +53,18 @@ var io = require('socket.io').listen(server);
 
 app.post('/setUsername', function(req,res){
     var name = req.body.username;
-    console.log(req.body);
-    var insertUser = function(err,db){
-      db.collection('lixx3524_messages').insert({'username':name});
-      db.close();
+    if(name != ''){
+      console.log(req.body);
+      var insertUser = function(err,db){
+        db.collection('lixx3524_messages').insert({'username':name});
+        db.close();
+      }
+      mongo.connect(insertUser);
+      res.redirect('/spectator')
+    }else{
+      res.redirect('/register');
     }
-    mongo.connect(insertUser);
-    res.redirect('/spectator')
+
 });
 app.post('/hit', function(req,res){
     var location = req.body.location;
