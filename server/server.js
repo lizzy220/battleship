@@ -65,7 +65,6 @@ app.post('/setUsername', function(req,res){
     }else{
       res.redirect('/register');
     }
-
 });
 app.post('/hit', function(req,res){
     var location = req.body.location;
@@ -118,7 +117,6 @@ function turnBaseRoutine() {
     setInterval(function() {
         var result;
         if (nextTurn == 'player') {
-            nextTurn = 'computer';
             result = playerTurn();
             if (result) {
                 nextTurn = 'computer';
@@ -139,6 +137,7 @@ function turnBaseRoutine() {
 
 function playerTurn() {
     playerMove = vote(); // collect players move
+    console.log(playerMove);
     if (playerMove == -1) {
         return null;
     }

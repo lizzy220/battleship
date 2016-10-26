@@ -4,17 +4,6 @@ socket.on('message', function(data) {
     var gameboardName = data['gameboardName'];
     var gameboard = data['gameboard'];
 
-    // //initial gameboard
-    // if(gameboardName == 'human-player'){
-    // var occupiedNew = [];
-    // occupiedNew = gameboard.getOccupied(occupied);
-    // console.log(occupiedNew);
-    // for(p in occupiedNew){
-    //   var i = p/10, j=p%10;
-    //   $('.' + gameboardName + ' ' + '.grid-cell-'+i+'-'+j).css('background-color','#0000ff');
-    //   }
-    // }
-
     //refresh the gameboard
     var classPrefix = '.' + gameboardName + ' ' + '.grid-cell-';
     refreshMisses(gameboard, classPrefix);
