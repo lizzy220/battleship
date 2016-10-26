@@ -1,17 +1,43 @@
 var socket = io.connect();
 
 socket.on('message', function(data) {
-    var i = data['location'] / 10;
-    var j = data['location'] % 10;
-    var player = data['player'];
-    $(player + ' ' + '.grid-cell-' + i + '-' + j).css('background-color', '#ff6666');
-    console.log(data);
-    // if(data[success]){
-    //     $(player + ' ' + '.grid-cell-' + i + '-' + j).style.backgroundColor = '#ff6666';
-    // }else{
-    //     $(player + ' ' + '.grid-cell-' + i + '-' + j).style.backgroundColor = '#99ff66';
-    // }
+    var gameboardName = data['gameboardName'];
+    var gameboard = data['gameboard'];
+    //refresh the gameboard
+    var classPrefix = '.' + gameboardName + ' ' + '.grid-cell-';
+    refreshMisses(gameboard, classPrefix);
+    refreshShip(gameboard.destroyer, classPrefix);
+    refreshShip(gameboard.submarine, classPrefix);
+    refreshShip(gameboard.cruiser, classPrefix);
+    refreshShip(gameboard.battleship, classPrefix);
+    refreshShip(gameboard.carrier, classPrefix);
+
 });
+
+function refreshMisses(gameboard, classPrefix){
+    for(var k in gameboard.misses){
+        var i = Math.floor(gameboard.misses[k] / 10);
+        var j = gameboard.misses[k] % 10;
+        $(classPrefix + i + '-' + j).css('background-color', '#99ff99');
+      }
+}
+
+function refreshShip(ship, classPrefix){
+    var color = '#ff6666';
+    if(ship.status == 'sunk') color = '#000000';
+    var i = Math.floor(ship.position / 10), j = ship.position % 10;
+    if(ship.direction == 0){
+        for(var k = 0; k < ship.length; k++, j++){
+            if(((1 << k) & ship.hit) > 0)
+                $(classPrefix + i + '-' + j).css('background-color', color);
+        }
+    }else{
+        for(var k = 0; k < ship.length; k++, i++){
+            if(((1 << k) & ship.hit) > 0)
+                $(classPrefix + i + '-' + j).css('background-color', color);
+        }
+    }
+}
 
 $(function() {
     // draw the grid
@@ -40,7 +66,7 @@ $(function() {
             'location': i * 10 + j,
           },
           success: function(data){
-              console.log(i * 10 + j);
+              // console.log(i * 10 + j);
           }
       });
     });

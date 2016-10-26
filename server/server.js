@@ -10,7 +10,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var port = process.env.PORT || 3000; // For when we deploy to Heroku
 var server = app.listen(port)
 var votes = [];
-
+var canStart = true;
+var ai;
 //-------------Example for use database-------------
 // var findMessages = function(err,db) {
 //   assert.equal(null, err);
@@ -34,33 +35,28 @@ app.get('/spectator', function(req, res){
 app.get('/', function(req, res){
 
     })
-app.get('/test', function(req, res){
-    var ai = new AI();
-   for(var i = 0; i < 10; i++){
-      ai.aiNextMove();
-   }
-})
 
 var io = require('socket.io').listen(server);
 app.post('/hit', function(req,res){
     var location = req.body.location;
     votes[location]++;
-    // io.sockets.on('connection', function (socket) {
-    io.sockets.emit('message', location);
-    // })
-    console.log(location);
+    // console.log(votes[location]);
     res.json({
       'success':  true,
       'message':  req.body,
     })
 })
 
-app.post('/place_ship', function(req,res){
-    res.json({
-      'success':  true,
-    })
-})
-
+io.sockets.on('connection', function (socket) {
+    if(canStart) {
+        canStart = false;
+        init_game();
+    }else{
+        var data = {'gameboardName': 'computer-player',
+                    'gameboard' : ai.aiBoard,};
+        socket.emit('message', data);
+    }
+});
 
 function vote(){
     var voteLocation = 0;
@@ -75,6 +71,19 @@ function vote(){
     return voteLocation;
 }
 
+function init_game(){
+    ai = new AI();
+    for(var i = 0; i < 100; i++)
+        votes[i] = 0;
+}
+
 setInterval(function(){
     var voteLocation = vote();
+    ai.hit(voteLocation, ai.aiBoard);
+    var winner = ai.winner();
+    var data = {'gameboard' : ai.aiBoard,
+                'gameboardName' : 'computer-player',
+                'winner': winner};
+    io.sockets.emit('message', data);
+    console.log('hit');
 }, 1000 * 10);

@@ -9,11 +9,11 @@ var AI = function() {
     init_bsCPUplayer(this.bsCPUplayer, this.playerBoard);
     this.hit = function(pos, gameboard){
         var hit = false;
-        hit |= hitShip(gameboard.destroyer, pos);
-        hit |= hitShip(gameboard.submarine, pos);
-        hit |= hitShip(gameboard.cruiser, pos);
-        hit |= hitShip(gameboard.battleship, pos);
-        hit |= hitShip(gameboard.carrier, pos);
+        hit |= hitShip(gameboard.destroyer, pos, gameboard);
+        hit |= hitShip(gameboard.submarine, pos, gameboard);
+        hit |= hitShip(gameboard.cruiser, pos, gameboard);
+        hit |= hitShip(gameboard.battleship, pos, gameboard);
+        hit |= hitShip(gameboard.carrier, pos, gameboard);
         if(!hit){
             gameboard.misses.push(pos);
         }
@@ -22,10 +22,15 @@ var AI = function() {
         var nextLoc = this.bsCPUplayer.move(false, 0, 0);
         console.log(nextLoc);
         return nextLoc;
+    };
+    this.winner = function(){
+        if(this.aiBoard.aliveShipNum == 0) return "Player";
+        if(this.playerBoard.aliveShipNum == 0) return "Computer";
+        return "";
     }
 }
 
-function hitShip(ship, pos){
+function hitShip(ship, pos, gameboard){
     var hit = false;
     if(ship.direction == 0){
         if(pos >= ship.position && pos < ship.position + ship.length){
@@ -40,6 +45,7 @@ function hitShip(ship, pos){
     }
     if(ship.hit == (1 << ship.length) - 1){
         ship.status = 'sunk';
+        gameborad.aliveShipNum--;
     }
     return hit;
 }

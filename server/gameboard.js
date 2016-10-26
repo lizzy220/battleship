@@ -21,6 +21,7 @@ function RandomGameboard() {
     this.carrier = new RandomShip(5, occupied);
     occupied = occupied.concat(get_ship_positions(this.carrier.position, this.carrier.length, this.carrier.direction));
     this.misses = [];
+    this.aliveShipNum = 5;
     // this.hits = [];
     // console.log(occupied);
 }
