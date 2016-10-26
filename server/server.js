@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var port = process.env.PORT || 3000; // For when we deploy to Heroku
 var server = app.listen(port)
 var votes = [];
+var nextTurn; // either computer's turn or player's turn
 var canStart = true;
 var ai;
 //-------------Example for use database-------------
@@ -102,9 +103,52 @@ function vote(){
 
 function init_game(){
     ai = new AI();
+    init_votes();
+    nextTurn = 'player'
+    // setTurnBase();
+    turnBaseRoutine();
+}
+
+function init_votes(){
     for(var i = 0; i < 100; i++)
         votes[i] = 0;
-    setTurnBase();
+}
+
+function turnBaseRoutine() {
+    setInterval(function() {
+        var result;
+        if (nextTurn == 'player') {
+            nextTurn = 'computer';
+            retult = playerTurn();
+        } else {
+            result = computerTurn();
+            nextTurn = 'player';
+            init_votes();
+        }
+        io.sockets.emit('message', result);
+        if (result['winner'] != "") {
+            clearInterval();
+        }
+    }, 1000*10);
+}
+
+function playerTurn() {
+    playerMove = vote(); // collect players move
+    ai.hit(playerMove);
+    winner = ai.winner();
+    return {'gameboard' : ai.aiBoard,
+            'gameboardName' : 'computer-player',
+            'winner': winner};
+    // io.sockets.emit('message', data);
+}
+function computerTurn() {
+    var nextMove = ai.aiNextMove();
+    ai.hit(nextMove, ai.playerBoard);
+    winner = ai.winner();
+    return {'gameboard' : ai.playerBoard,
+            'gameboardName' : 'human-player',
+            'winner': winner};
+    // io.sockets.emit('message', data);
 }
 
 function setTurnBase(){
