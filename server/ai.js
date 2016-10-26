@@ -1,12 +1,13 @@
 var Gameboard = require('./gameboard');
-var bsCPUplayer = require('./bsCPUplayer');
+var computerPlayer = require('./computerPlayer');
 
 var AI = function() {
     this.aiBoard = new Gameboard();
     this.playerBoard = new Gameboard();
     console.log(this.playerBoard);
-    this.bsCPUplayer = new bsCPUplayer();
-    init_bsCPUplayer(this.bsCPUplayer, this.playerBoard);
+    this.computerPlayer = new computerPlayer();
+    this.computerPlayer.initialize(this.playerBoard);
+
     this.hit = function(pos, gameboard){
         var hit = false;
         hit |= hitShip(gameboard.destroyer, pos, gameboard);
@@ -19,7 +20,7 @@ var AI = function() {
         }
     };
     this.aiNextMove = function(){
-        var nextLoc = this.bsCPUplayer.move(false, 0, 0);
+        var nextLoc = this.computerPlayer.fireAtBestPosition();
         console.log(nextLoc);
         return nextLoc;
     };
@@ -48,27 +49,6 @@ function hitShip(ship, pos, gameboard){
         gameboard.aliveShipNum--;
     }
     return hit;
-}
-
-function init_bsCPUplayer(bsCPUplayer, gameborad){
-    init_bsCPUplayer_ship(bsCPUplayer, gameborad.destroyer);
-    init_bsCPUplayer_ship(bsCPUplayer, gameborad.submarine);
-    init_bsCPUplayer_ship(bsCPUplayer, gameborad.cruiser);
-    init_bsCPUplayer_ship(bsCPUplayer, gameborad.battleship);
-    init_bsCPUplayer_ship(bsCPUplayer, gameborad.carrier);
-}
-
-function init_bsCPUplayer_ship(bsCPUplayer, ship){
-    var x = ship.position / 10, y = ship.position % 10;
-    if(ship.direction == 0){
-        for(var i = 0; i < ship.length; i++){
-            bsCPUplayer.move(true, x, y + i);
-        }
-    }else{
-        for(var i = 0; i < ship.length; i++){
-            bsCPUplayer.move(true, x + i, y);
-        }
-    }
 }
 
 module.exports = AI;

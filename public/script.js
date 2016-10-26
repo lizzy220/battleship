@@ -3,6 +3,7 @@ var socket = io.connect();
 socket.on('message', function(data) {
     var gameboardName = data['gameboardName'];
     var gameboard = data['gameboard'];
+
     //refresh the gameboard
     var classPrefix = '.' + gameboardName + ' ' + '.grid-cell-';
     refreshMisses(gameboard, classPrefix);
