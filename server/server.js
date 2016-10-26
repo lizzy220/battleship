@@ -118,15 +118,11 @@ function turnBaseRoutine() {
     setInterval(function() {
         var result;
         if (nextTurn == 'player') {
-<<<<<<< HEAD
             nextTurn = 'computer';
-            result = playerTurn();
-=======
             result = playerTurn();
             if (result) {
                 nextTurn = 'computer';
             }
->>>>>>> 405f6601e13bc646e22d066d8f036cb52f91f3b6
         } else {
             result = computerTurn();
             nextTurn = 'player';
@@ -143,12 +139,9 @@ function turnBaseRoutine() {
 
 function playerTurn() {
     playerMove = vote(); // collect players move
-<<<<<<< HEAD
-=======
     if (playerMove == -1) {
         return null;
     }
->>>>>>> 405f6601e13bc646e22d066d8f036cb52f91f3b6
     ai.hit(playerMove, ai.aiBoard);
     winner = ai.winner();
     return {'gameboard' : ai.aiBoard,
