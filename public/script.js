@@ -14,6 +14,10 @@ socket.on('message', function(data) {
 
 });
 
+socket.on('newlog', function(data){
+  addLog(data['username'], data['pos']);
+});
+
 function refreshMisses(gameboard, classPrefix){
     for(var k in gameboard.misses){
         var i = Math.floor(gameboard.misses[k] / 10);
@@ -39,19 +43,30 @@ function refreshShip(ship, classPrefix){
     }
 }
 
+function addLog(name, pos){
+  var i = Math.floor(pos/10);
+  var j = pos % 10;
+  var logbar = document.getElementById('log');
+  var action = document.createElement('div');
+  action.innerHTML =  name + ' vote: (' + i +',' + j +')';
+  logbar.appendChild(action);
+}
+
 $(function() {
+    var myname;
+
     //hide the game board, set a username to play
-    // $(".container").hide();
-    // $("#start").click(function() {
-    //     if($('#username').val()!="") {
-    //      socket.emit('username', $('#username').val());
-    //      $(".container").show();
-    //      $(".register").hide();
-    //      }
-    //      else {
-    //      alert('please enter a username!');
-    //      }
-    // });
+    $(".container").hide();
+    $("#start").click(function() {
+      if($('#username').val()!="") {
+        myname = $('#username').val();
+        socket.emit('username', $('#username').val());
+        $(".container").show();
+        $(".register").hide();
+      }else {
+        alert('please enter a username!');
+      }
+    });
     // draw the grid
     var gridDiv = document.querySelectorAll('.grid');
     for (var grid = 0; grid < gridDiv.length; grid++) {
@@ -81,6 +96,10 @@ $(function() {
               // console.log(i * 10 + j);
           }
       });
+      var pos = i*10+j;
+      addLog('me', pos);
+      var mes = {'username':myname, 'pos':pos};
+      socket.emit('newlog', mes);
     });
     //get the boat type
     var text = '0';

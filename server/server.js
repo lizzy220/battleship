@@ -29,9 +29,9 @@ var ai;
 app.use(express.static('public')) // We will want this later
 app.set('view engine', 'ejs')
 
-app.get('/register', function(req, res){
-      res.render('register')
-    })
+// app.get('/register', function(req, res){
+//       res.render('register')
+//     })
 app.get('/spectator', function(req, res){
       res.render('index')
     })
@@ -41,31 +41,36 @@ app.get('/', function(req, res){
     })
 
 var io = require('socket.io').listen(server);
-// io.sockets.on('connection', function(socket){
-//   socket.on('username', function(data){ //insert username to db
-//      var insertUser = function(err,db){
-//         db.collection('lixx3524_messages').insert(data, function(err, ids){});
+io.sockets.on('connection', function(socket){
+  // socket.on('username', function(data){ //insert username to db
+  //   socket.username = data
+  //   // console.log(data);
+  //   // var insertUser = function(err,db){
+  //   //   db.collection('userinfo').insert({'username':data});
+  //   //   db.close();
+  //   // }
+  //   // mongo.connect(insertUser);
+  // })
+  socket.on('newlog', function(data){
+    // var mes = {'username': socket.username, 'pos': data};
+    socket.broadcast.emit('newlog', data);
+  })
+})
+
+// app.post('/setUsername', function(req,res){
+//     var name = req.body.username;
+//     if(name != ''){
+//       // console.log(req.body);
+//       var insertUser = function(err,db){
+//         db.collection('userinfo').insert({'username':name});
 //         db.close();
-//      }
-//      mongo.connect(insertUser);
-//   })
-// })
-
-app.post('/setUsername', function(req,res){
-    var name = req.body.username;
-    if(name != ''){
-      console.log(req.body);
-      var insertUser = function(err,db){
-        db.collection('lixx3524_messages').insert({'username':name});
-        db.close();
-      }
-      mongo.connect(insertUser);
-      res.redirect('/spectator')
-    }else{
-      res.redirect('/register');
-    }
-
-});
+//       }
+//       mongo.connect(insertUser);
+//       res.redirect('/spectator')
+//     }else{
+//       res.redirect('/register');
+//     }
+// });
 app.post('/hit', function(req,res){
     var location = req.body.location;
     votes[location]++;
@@ -76,16 +81,7 @@ app.post('/hit', function(req,res){
     })
 })
 
-io.sockets.on('connection', function (socket) {
-    if(canStart) {
-        canStart = false;
-        init_game();
-    }else{
-        var data = {'gameboardName': 'computer-player',
-                    'gameboard' : ai.aiBoard,};
-        socket.emit('message', data);
-    }
-});
+
 
 function vote(){
     var voteLocation = 0;
