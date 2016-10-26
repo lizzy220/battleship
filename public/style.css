@@ -160,7 +160,6 @@ button:active {
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
-	background: Heat.png
 }
 .grid-cell:hover {
 	cursor: pointer;
