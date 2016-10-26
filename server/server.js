@@ -85,23 +85,26 @@ function init_game(){
     ai = new AI();
     for(var i = 0; i < 100; i++)
         votes[i] = 0;
+    setTurnBase();
 }
 
-setInterval(function(){
-    var voteLocation = vote();
-    ai.hit(voteLocation, ai.aiBoard);
-    var winner = ai.winner();
-    var data = {'gameboard' : ai.aiBoard,
-                'gameboardName' : 'computer-player',
-                'winner': winner};
-    io.sockets.emit('message', data);
-    console.log('palyer');
+function setTurnBase(){
+  setInterval(function(){
+      var voteLocation = vote();
+      ai.hit(voteLocation, ai.aiBoard);
+      var winner = ai.winner();
+      var data = {'gameboard' : ai.aiBoard,
+                  'gameboardName' : 'computer-player',
+                  'winner': winner};
+      io.sockets.emit('message', data);
+      console.log('palyer');
 
-    var nextMove = ai.aiNextMove();
-    ai.hit(nextMove, ai.playerBoard);
-    winner = ai.winner();
-    data = {'gameboard' : ai.playerBoard,
-            'gameboardName' : 'human-player',
-            'winner': winner};
-    io.sockets.emit('message', data);
-}, 1000 * 2);
+      var nextMove = ai.aiNextMove();
+      ai.hit(nextMove, ai.playerBoard);
+      winner = ai.winner();
+      data = {'gameboard' : ai.playerBoard,
+              'gameboardName' : 'human-player',
+              'winner': winner};
+      io.sockets.emit('message', data);
+  }, 1000 * 10);
+}
