@@ -89,7 +89,7 @@ io.sockets.on('connection', function (socket) {
 });
 
 function vote(){
-    var voteLocation = 0;
+    var voteLocation = -1;
     var maxVal = votes[0];
     for(var i = 1; i < votes.length; i++){
         if(maxVal < votes[i]){
@@ -118,23 +118,30 @@ function turnBaseRoutine() {
     setInterval(function() {
         var result;
         if (nextTurn == 'player') {
-            nextTurn = 'computer';
-            retult = playerTurn();
+            result = playerTurn();
+            if (result) {
+                nextTurn = 'computer';
+            }
         } else {
             result = computerTurn();
             nextTurn = 'player';
-            init_votes();
         }
-        io.sockets.emit('message', result);
-        if (result['winner'] != "") {
-            clearInterval();
+        console.log("It's " + nextTurn + "'s turn to move")
+        if (result) {
+            io.sockets.emit('message', result);
+            if (result['winner'] != "") {
+                clearInterval();
+            }
         }
     }, 1000*10);
 }
 
 function playerTurn() {
     playerMove = vote(); // collect players move
-    ai.hit(playerMove);
+    if (playerMove == -1) {
+        return null;
+    }
+    ai.hit(playerMove, ai.aiBoard);
     winner = ai.winner();
     return {'gameboard' : ai.aiBoard,
             'gameboardName' : 'computer-player',
