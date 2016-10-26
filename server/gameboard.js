@@ -47,8 +47,8 @@ function randomIntInc(low, high) {
 }
 var is_valid_position = function(position, length, direction, occupied) {
     positions = get_ship_positions(position, length, direction);
-    for (p in positions) {
-        if (occupied.indexOf(p) != -1) {
+    for (i in positions) {
+        if (occupied.indexOf(positions[i]) != -1) {
             return false;
         }
     }
