@@ -95,6 +95,7 @@ function insertdb(collection, record){
 function getRecentGameStats() {
     var getResults = function(err, db) {
         db.collection('GameResults').find();
+        db.clost();
     }
     return mongo.connect(getResults);
 }
