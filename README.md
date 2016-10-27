@@ -3,12 +3,14 @@ __Submitted by:__ _team_name_
 
 __Team members:__
 
-- username@umn.edu
-- username@umn.edu
-- ...
+- chen4656@umn.edu
 - grin0098@umn.edu
+- lixx3524@umnedu
+- nixxx169@umn.edu
+- tangx668@umn.edu
 
-__Heroku URL:__ https://thebattleship.herokuapp.com/spectator
+
+__Heroku URL:__ https://thebattleship.herokuapp.com/
 
 __Argument of ambition:__
 _Briefly argue why this was a technically ambitious project_
