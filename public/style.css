@@ -213,6 +213,7 @@ button:active {
     font-size: 1.2em;
     font-family: 'Comic Sans MS'
 }
+<<<<<<< Updated upstream
 
 table {
     font-family: arial, sans-serif;
@@ -228,4 +229,12 @@ td, th {
 
 tr:nth-child(even) {
     background-color: #FFFFCC;
+=======
+.game-finish-info {
+		position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+>>>>>>> Stashed changes
 }

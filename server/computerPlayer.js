@@ -1,4 +1,5 @@
 function computerPlayer(){
+      "use strict"
       this.SHIP = 0,
       this.MISS = 1,
       this.HIT = 2,

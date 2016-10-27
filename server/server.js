@@ -13,7 +13,7 @@ var server = app.listen(port)
 var votes = [];
 var nextTurn; // either computer's turn or player's turn
 var canStart = true;
-var ai;
+var ai = null;
 //-------------Example for use database-------------
 // var findMessages = function(err,db) {
 //   assert.equal(null, err);
@@ -78,7 +78,6 @@ app.post('/loadGame', function(req, res){
       init_game();
    }
    res.json({
-      'aiBoard': ai.aiBoard,
       'playerBoard': ai.playerBoard,
    })
 })
@@ -174,6 +173,7 @@ function playerTurn() {
     ai.hit(playerMove, ai.aiBoard);
     io.sockets.emit('newMove', {'name': "human", 'pos': playerMove});
     winner = ai.winner();
+    if(winner != "") canStart = true;
     return {'gameboard' : ai.aiBoard,
             'gameboardName' : 'computer-player',
             'winner': winner};
@@ -185,6 +185,7 @@ function computerTurn() {
     ai.hit(nextMove, ai.playerBoard);
     io.sockets.emit('newMove', {'name': "computer", 'pos': nextMove});
     winner = ai.winner();
+    if(winner != "") canStart = true;
     return {'gameboard' : ai.playerBoard,
             'gameboardName' : 'human-player',
             'winner': winner};

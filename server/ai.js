@@ -1,7 +1,8 @@
 var Gameboard = require('./gameboard');
 var computerPlayer = require('./computerPlayer');
 
-var AI = function() {
+function AI() {
+    "use strict"
     this.aiBoard = new Gameboard();
     this.playerBoard = new Gameboard();
     console.log(this.playerBoard);
