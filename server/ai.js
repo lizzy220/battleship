@@ -5,10 +5,10 @@ function AI() {
     "use strict"
     this.aiBoard = new Gameboard();
     this.playerBoard = new Gameboard();
-    console.log(this.playerBoard);
+    // console.log(this.playerBoard);
     this.computerPlayer = new computerPlayer();
     this.computerPlayer.initialize(this.playerBoard);
-    this.starttime = Date.now();
+    this.starttime = new Date().toLocaleString();
 
 
     this.hit = function(pos, gameboard){
@@ -27,7 +27,7 @@ function AI() {
     };
     this.aiNextMove = function(){
         var nextLoc = this.computerPlayer.fireAtBestPosition();
-        console.log(nextLoc);
+        // console.log(nextLoc);
         return nextLoc;
     };
     this.winner = function(){

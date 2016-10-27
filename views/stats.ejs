@@ -11,8 +11,8 @@
 </head>
 <body>
 <div style="display: block; width: 60%; text-align: center; margin-top: 20px; margin-bottom: 100px; margin-left:auto; margin-right:auto">
-    <a href="/spectator" class="button">Home</a>
-    <a href="/statistics" class="button">Statistics</a>
+    <a href="/" class="button">Play</a>
+    <a href="/spectator" class="button">Spectator</a>
     <h1>Statistics</h1>
 </div>
 <div style="display: block; width: 60%; text-align: center; margin-top: 20px; margin-bottom: 100px; margin-left:auto; margin-right:auto">
@@ -26,7 +26,7 @@
   <% for (var i = 0; i < results.length; i++) { %>
       <tr>
         <td><%= results[i].winner %></td>
-        <td><%= Math.round(results[i].date / 31536000000)- 31 %> - </td>
+        <td><%= results[i].date %></td>
         <td><%= results[i].human_accuracy  %></td>
         <td><%= results[i].computer_accuracy %></td>
       </tr>

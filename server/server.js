@@ -101,10 +101,10 @@ function getRecentGameStats(res) {
             if (err) {
                 console.log(err);
              } else if (result.length) {
-                console.log('Found:', result);
+                // console.log('Found:', result);
                 res.render('stats', {'results': result});
              } else {
-                console.log('No document(s) found with defined "find" criteria!');
+                // console.log('No document(s) found with defined "find" criteria!');
                 res.render('stats', {'results': []});
              }
              //Close connection
@@ -145,7 +145,7 @@ function turnBaseRoutine() {
         var result;
         if (nextTurn == 'player') {
             result = playerTurn();
-            console.log(result);
+            // console.log(result);
             if (result != null) {
                 nextTurn = 'computer';
             }
@@ -159,17 +159,17 @@ function turnBaseRoutine() {
                 io.sockets.emit("systemMessage", "Game Over... " + winner + " is the winner!")
                 human_accuracy = ai.playerBoard.hits / ai.playerBoard.count;
                 computer_accuracy = ai.aiBoard.hits / ai.aiBoard.count;
-                insertdb('GameResults', {'winner': winner, 'date': ai.starttime, 'human_accuracy': human_accuracy, 'computer_accuracy': computer_accuracy});
+                insertdb('GameResults', {'winner': winner, 'date': ai.starttime, 'human_accuracy': human_accuracy.toFixed(2), 'computer_accuracy': computer_accuracy.toFixed(2)});
                 clearInterval(id);
             }
         }
-        console.log("It's " + nextTurn + "'s turn to move")
+        // console.log("It's " + nextTurn + "'s turn to move")
     }, 1000 * 1);
 }
 
 function playerTurn() {
     playerMove = vote(); // collect players move
-    console.log(playerMove);
+    // console.log(playerMove);
     if (playerMove == -1) {
         return null;
     }
