@@ -89,6 +89,11 @@ function insertdb(collection, record){
   mongo.connect(insertUser);
 }
 
+function getRecentGameStats() {
+    var data = db.collection('GameResults').find();
+    return data;
+}
+
 function vote(){
     var voteLocation = -1;
     var maxVal = 0;
