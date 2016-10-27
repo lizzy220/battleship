@@ -82,6 +82,7 @@ app.post('/loadGame', function(req, res){
                       'hitPts': ai.aiBoard.hitPts,
                       'missPts': ai.aiBoard.missPts,},
       'playerBoard': ai.playerBoard,
+      'nextTurn': nextTurn,
    })
 })
 //using this function to insert data to database
