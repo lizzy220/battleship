@@ -78,6 +78,9 @@ app.post('/loadGame', function(req, res){
       init_game();
    }
    res.json({
+      'aiBoard': {'sunkPts': ai.aiBoard.sunkPts,
+                      'hitPts': ai.aiBoard.hitPts,
+                      'missPts': ai.aiBoard.missPts,},
       'playerBoard': ai.playerBoard,
    })
 })
@@ -153,7 +156,7 @@ function turnBaseRoutine() {
         if (result != null) {
             io.sockets.emit('message', result);
             if (result['winner'] != "") {
-                io.sockets.emit("systemMessage", "Game Over... " + winner + "is the winner!")
+                io.sockets.emit("systemMessage", "Game Over... " + winner + " is the winner!")
                 human_accuracy = ai.playerBoard.hits / ai.playerBoard.count;
                 computer_accuracy = ai.aiBoard.hits / ai.aiBoard.count;
                 insertdb('GameResults', {'winner': winner, 'date': ai.starttime, 'human_accuracy': human_accuracy, 'computer_accuracy': computer_accuracy});
@@ -161,7 +164,7 @@ function turnBaseRoutine() {
             }
         }
         console.log("It's " + nextTurn + "'s turn to move")
-    }, 1000);
+    }, 1000 * 5);
 }
 
 function playerTurn() {
@@ -174,7 +177,9 @@ function playerTurn() {
     io.sockets.emit('newMove', {'name': "human", 'pos': playerMove});
     winner = ai.winner();
     if(winner != "") canStart = true;
-    return {'gameboard' : ai.aiBoard,
+    return {'gameboard' : {'sunkPts': ai.aiBoard.sunkPts,
+                          'hitPts': ai.aiBoard.hitPts,
+                          'missPts': ai.aiBoard.missPts,},
             'gameboardName' : 'computer-player',
             'winner': winner};
     // io.sockets.emit('message', data);

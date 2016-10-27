@@ -9,7 +9,6 @@
 // }
 
 function RandomGameboard() {
-    "use strict"
     var occupied = []
     this.destroyer = new RandomShip(2, occupied);
     occupied = occupied.concat(get_ship_positions(this.destroyer.position, this.destroyer.length, this.destroyer.direction));
@@ -21,13 +20,12 @@ function RandomGameboard() {
     occupied = occupied.concat(get_ship_positions(this.battleship.position, this.battleship.length, this.battleship.direction));
     this.carrier = new RandomShip(5, occupied);
     occupied = occupied.concat(get_ship_positions(this.carrier.position, this.carrier.length, this.carrier.direction));
-    this.misses = [];
+    this.missPts = [];
+    this.hitPts = [];
+    this.sunkPts = [];
     this.aliveShipNum = 5;
     this.count = 0;
     this.hits = 0;
-    // getOccupied(occupied);
-    // this.hits = [];
-    // console.log(occupied);
 }
 
 //try to copy the occupied value out for initialize the board with user's ships, if not right, revise it
