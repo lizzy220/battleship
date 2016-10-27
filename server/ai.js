@@ -7,6 +7,8 @@ var AI = function() {
     console.log(this.playerBoard);
     this.computerPlayer = new computerPlayer();
     this.computerPlayer.initialize(this.playerBoard);
+    this.starttime = Date.now();
+
 
     this.hit = function(pos, gameboard){
         var hit = false;
@@ -17,7 +19,10 @@ var AI = function() {
         hit |= hitShip(gameboard.carrier, pos, gameboard);
         if(!hit){
             gameboard.misses.push(pos);
+        } else {
+            gameboard.hits++;
         }
+        gameboard.count++;
     };
     this.aiNextMove = function(){
         var nextLoc = this.computerPlayer.fireAtBestPosition();
@@ -25,7 +30,7 @@ var AI = function() {
         return nextLoc;
     };
     this.winner = function(){
-        if(this.aiBoard.aliveShipNum == 0) return "Player";
+        if(this.aiBoard.aliveShipNum == 0) return "Human";
         if(this.playerBoard.aliveShipNum == 0) return "Computer";
         return "";
     }

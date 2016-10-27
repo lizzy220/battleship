@@ -16,6 +16,10 @@ socket.on('newMove', function(data){
   addNewMove(data['name'], data['pos']);
 });
 
+socket.on('systemMessage', function(data){
+  addSystemMessage(data);
+});
+
 function refreshGameBoard(gameboard, classPrefix, computerRound){
   refreshMisses(gameboard, classPrefix);
   refreshShip(gameboard.destroyer, classPrefix, computerRound);
@@ -74,6 +78,14 @@ function addNewMove(name, pos){
   action.className = "log-entry";
   action.innerHTML =  '<b>' + name + '</b> hits: (' + i +',' + j +')';
   logbar.insertBefore(action, logbar.childNodes[0]);
+}
+
+function addSystemMessage(msg) {
+    var logbar = document.getElementById('log');
+    var action = document.createElement('div');
+    action.className = "log-entry";
+    action.innerHTML =  '<b>System</b>: ' + msg;
+    logbar.insertBefore(action, logbar.childNodes[0]);
 }
 
 $(function() {
