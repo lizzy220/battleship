@@ -2,7 +2,7 @@ tml, body {
 	width: 100%;
 	padding: 0;
 	margin: 0;
-	background-color: #3366cc;
+	background-color: #99b3e6;
 	min-width: 860px;
 }
 h1, h2, h3, h4, h5, h6, p, li, span {
@@ -21,7 +21,7 @@ div {
 	margin: 0;
 }
 
-.button {
+/*.button {
     background-color: rgb(153, 153, 102);
     border: none;
     color: white;
@@ -32,9 +32,9 @@ div {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-}
+}*/
 
-button {
+button, .button{
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	font-size: 1.2em;
 	color: #EEEEEE;
