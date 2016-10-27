@@ -6,6 +6,7 @@ socket.on('message', function(data) {
     //refresh the gameboard
     var classPrefix = '.' + gameboardName + ' ' + '.grid-cell-';
     refreshGameBoard(gameboard, classPrefix, gameboardName == 'human-player');
+    if(data["winner"] != "") gameFinish(data["winner"]);
 });
 
 socket.on('newVote', function(data){
@@ -60,6 +61,12 @@ function refreshShip(ship, classPrefix, computerRound){
     }
 }
 
+function gameFinish(winner){
+    $(".container").hide();
+    $(".game-finish-info").show();
+    $(".winner").html(winner + " Win !");
+}
+
 function addNewVote(name, pos){
   var i = Math.floor(pos/10);
   var j = pos % 10;
@@ -90,9 +97,9 @@ function addSystemMessage(msg) {
 
 $(function() {
     var myname;
-
     //hide the game board, set a username to play
     $(".container").hide();
+    $(".game-finish-info").hide();
     $("#start").click(function() {
       if($('#username').val()!="") {
         myname = $('#username').val();
@@ -126,7 +133,7 @@ $(function() {
         }
       }
     }
-
+    var cnt = 0;
     $(".computer-player .grid-cell").click(function() {
       var i = parseInt(this.getAttribute("data-x"));
       var j = parseInt(this.getAttribute("data-y"));
@@ -144,11 +151,30 @@ $(function() {
       addNewVote('me', pos);
       var mes = {'username':myname, 'pos':pos};
       socket.emit('newVote', mes);
+      cnt++;
+      if(cnt % 2 == 0)
+        gameFinish("lily");
     });
-    //get the boat type
-    var text = '0';
-    $('.ships li').click(function(){
-    alert($(this).text());
-    text = $(this).text();
+
+    $('#restart').click(function(){
+      $(".game-finish-info").hide();
+      $(".container").show();
+      $.ajax({
+          url: "/loadGame",
+          type: "post",
+          success: function(data){
+              recoverGameBoard();
+              refreshGameBoard(data['playerBoard'], '.human-player .grid-cell-', true);
+          }
+      });
     });
 })
+
+function recoverGameBoard(){
+  for (var i = 0; i < 10; i++) {
+    for (var j = 0; j < 10; j++) {
+      $('.human-player .grid-cell-' + i + '-' + j).css('background-color', '#FFFFCC');
+      $('.computer-player .grid-cell-' + i + '-' + j).css('background-color', '#FFFFCC');
+    }
+  }
+}
