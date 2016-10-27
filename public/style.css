@@ -70,7 +70,7 @@ button:active {
 .container {
 	width: 80%;
 	text-align: center;
-	margin: 20px auto 100px 20%;
+	margin: 20px auto 100px auto;
 }
 /*.container {
 	width: 440px;
@@ -80,6 +80,7 @@ button:active {
 }
 .game-container {
 	position: relative;
+    margin-left: 20%
 }
 #left-sidebar{
 	width: 20%;
@@ -104,7 +105,7 @@ button:active {
 	border-radius: 5px;
 }
 #left-sidebar, #restart-sidebar {
-	left: -20%;
+	left: -30%;
 }
 #right-sidebar {
 	right: -150px;
