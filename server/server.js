@@ -38,8 +38,8 @@ app.get('/spectator', function(req, res){
       res.render('index')
     })
 
-app.get('/', function(req, res){
-
+app.get('/view', function(req, res){
+        res.render('spectator')
     })
 
 app.get('/statistics', function(req, res){
