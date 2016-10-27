@@ -9,7 +9,6 @@
 // }
 
 function RandomGameboard() {
-    "use strict"
     var occupied = []
     this.destroyer = new RandomShip(2, occupied);
     occupied = occupied.concat(get_ship_positions(this.destroyer.position, this.destroyer.length, this.destroyer.direction));

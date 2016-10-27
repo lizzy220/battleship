@@ -78,6 +78,7 @@ app.post('/loadGame', function(req, res){
    }
    res.json({
       'playerBoard': ai.playerBoard,
+      'aiBoard': ai.aiBoard,
    })
 })
 //using this function to insert data to database
