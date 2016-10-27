@@ -128,13 +128,17 @@ function turnBaseRoutine() {
             result = computerTurn();
             nextTurn = 'player';
         }
-        console.log("It's " + nextTurn + "'s turn to move")
         if (result != null) {
             io.sockets.emit('message', result);
             if (result['winner'] != "") {
+                io.sockets.emit("Game Over... " + winner + "is the winner!")
+                human_accuracy = ai.playerBoard.hits / ai.playerBoard.count;
+                computer_accuracy = ai.aiBoard.hits / ai.aiBoard.count;
+                insertdb('GameResults', {'winner': winner, 'date': ai.starttime, 'human_accuracy': human_accuracy, 'computer_accuracy': computer_accuracy})
                 clearInterval(id);
             }
         }
+        console.log("It's " + nextTurn + "'s turn to move")
     }, 3000);
 }
 
@@ -152,6 +156,7 @@ function playerTurn() {
             'winner': winner};
     // io.sockets.emit('message', data);
 }
+
 function computerTurn() {
     var nextMove = ai.aiNextMove();
     ai.hit(nextMove, ai.playerBoard);
