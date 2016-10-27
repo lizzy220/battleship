@@ -147,7 +147,7 @@ function turnBaseRoutine() {
                 clearInterval();
             }
         }
-    }, 1000*5);
+    }, 1500);
 }
 
 function playerTurn() {
