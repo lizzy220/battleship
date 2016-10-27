@@ -235,18 +235,13 @@ td, th {
 tr:nth-child(even) {
     background-color: #FFFFCC;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 70cd908ec61e95873fc3296245a8812673ea5056
 .game-finish-info {
     position: fixed;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-<<<<<<< HEAD
-=======
 }
 
 .huge-title {
@@ -258,5 +253,4 @@ tr:nth-child(even) {
     font-size: 1em;
     /*background-color:rgba(0, 0, 0, 0);*/
     opacity: 0.8;
->>>>>>> 70cd908ec61e95873fc3296245a8812673ea5056
 }
