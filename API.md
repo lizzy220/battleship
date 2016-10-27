@@ -1,3 +1,4 @@
+__Command 1__
 curl -X POST https://thebattleship.herokuapp.com/loadGame
 Usage: When you need to start or restart a game, simply use the above command.
 Expected output: Any information about AI board and player board like following
@@ -19,12 +20,16 @@ Expected output: Any information about AI board and player board like following
 }
 
 
-
-curl --data "location = <the location you want to hit>" https://thebattleship.herokuapp.com/hit
+__Command 2__
+curl --data "location = <the location you want to hit>"
+https://thebattleship.herokuapp.com/hit
 Usage: use this command to vote. In our game, when you want to hit a cell in the grid, you
 first need to vote, and then server will select the cell which is voted the most times. If
-you vote to hit the third row's sixth cell, location = (3 - 1) * 10 + (6 - 1),and this command will be:
+you vote to hit the third row's sixth cell, location = (3 - 1) * 10 + (6 - 1),and this
+command will be:
+
 curl --data "location = 25" https://thebattleship.herokuapp.com/hit
+
 The expected output:
 {
   "success":true,                 //this means your vote is successful
