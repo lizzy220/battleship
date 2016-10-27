@@ -164,7 +164,7 @@ function turnBaseRoutine() {
             }
         }
         console.log("It's " + nextTurn + "'s turn to move")
-    }, 1000);
+    }, 1000 * 5);
 }
 
 function playerTurn() {
