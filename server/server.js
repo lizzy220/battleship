@@ -43,7 +43,7 @@ app.get('/', function(req, res){
     })
 
 app.get('/statistics', function(req, res){
-    var results = getRecentGameStats();
+    var retuls = getRecentGameStats();
     console.log(results);
     res.render('stats', {'results': results});
     })
@@ -95,7 +95,7 @@ function insertdb(collection, record){
 function getRecentGameStats() {
     var getResults = function(err, db) {
         db.collection('GameResults').find();
-        db.clost();
+        db.close();
     }
     return mongo.connect(getResults);
 }
