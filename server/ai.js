@@ -32,6 +32,9 @@ var AI = function() {
 }
 
 function hitShip(ship, pos, gameboard){
+    if (ship.status == 'sunk') {
+        return false;
+    }
     var hit = false;
     if(ship.direction == 0){
         if(pos >= ship.position && pos < ship.position + ship.length){
@@ -39,12 +42,12 @@ function hitShip(ship, pos, gameboard){
             hit = true;
         }
     }else{
-        if(((pos - ship.position) % 10 == 0) && ((pos - ship.position) / 10 < ship.length)){
+        if((pos >= ship.position && pos <= (ship.position + 10 * (ship.length-1)) && (pos - ship.position) % 10 == 0) && ((pos - ship.position) / 10 < ship.length)){
             ship.hit |= (1 << ((pos - ship.position) / 10));
             hit = true;
         }
     }
-    if(ship.hit == (1 << ship.length) - 1){
+    if(ship.hit == ((1 << ship.length) - 1)){
         ship.status = 'sunk';
         gameboard.aliveShipNum--;
     }

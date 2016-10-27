@@ -128,7 +128,7 @@ function init_votes(){
 }
 
 function turnBaseRoutine() {
-    setInterval(function() {
+    var id = setInterval(function() {
         var result;
         if (nextTurn == 'player') {
             result = playerTurn();
@@ -144,7 +144,7 @@ function turnBaseRoutine() {
         if (result != null) {
             io.sockets.emit('message', result);
             if (result['winner'] != "") {
-                clearInterval();
+                clearInterval(id);
             }
         }
     }, 1500);
