@@ -5,7 +5,8 @@ socket.on('message', function(data) {
     var gameboard = data['gameboard'];
     //refresh the gameboard
     var classPrefix = '.' + gameboardName + ' ' + '.grid-cell-';
-    refreshGameBoard(gameboard, classPrefix, gameboardName == 'human-player');
+    if(gameboardName == "human-player") refreshPlayerBoard(gameboard, classPrefix);
+    else refreshComputerBoard(gameboard, classPrefix);
     if(data["winner"] != "") gameFinish(data["winner"]);
 });
 
@@ -21,24 +22,30 @@ socket.on('systemMessage', function(data){
   addSystemMessage(data);
 });
 
-function refreshGameBoard(gameboard, classPrefix, computerRound){
-  refreshMisses(gameboard, classPrefix);
-  refreshShip(gameboard.destroyer, classPrefix, computerRound);
-  refreshShip(gameboard.submarine, classPrefix, computerRound);
-  refreshShip(gameboard.cruiser, classPrefix, computerRound);
-  refreshShip(gameboard.battleship, classPrefix, computerRound);
-  refreshShip(gameboard.carrier, classPrefix, computerRound);
+function refreshPlayerBoard(gameboard, classPrefix){
+  refreshMissHitsSunks(gameboard.missPts, classPrefix, '#99ff99');
+  refreshShip(gameboard.destroyer, classPrefix);
+  refreshShip(gameboard.submarine, classPrefix);
+  refreshShip(gameboard.cruiser, classPrefix);
+  refreshShip(gameboard.battleship, classPrefix);
+  refreshShip(gameboard.carrier, classPrefix);
 }
 
-function refreshMisses(gameboard, classPrefix){
-    for(var k in gameboard.misses){
-        var i = Math.floor(gameboard.misses[k] / 10);
-        var j = gameboard.misses[k] % 10;
-        $(classPrefix + i + '-' + j).css('background-color', '#99ff99');
+function refreshComputerBoard(computerBoard, classPrefix){
+    refreshMissHitsSunks(computerBoard['missPts'], classPrefix, '#99ff99');
+    refreshMissHitsSunks(computerBoard['hitPts'], classPrefix, '#ff6666');
+    refreshMissHitsSunks(computerBoard['sunkPts'], classPrefix, '#000000');
+}
+
+function refreshMissHitsSunks(nums, classPrefix, color){
+    for(var k in nums){
+        var i = Math.floor(nums[k] / 10);
+        var j = nums[k] % 10;
+        $(classPrefix + i + '-' + j).css('background-color', color);
       }
 }
 
-function refreshShip(ship, classPrefix, computerRound){
+function refreshShip(ship, classPrefix){
     var color = '#ff6666';
     if(ship.status == 'sunk') color = '#000000';
     var i = Math.floor(ship.position / 10), j = ship.position % 10;
@@ -46,7 +53,7 @@ function refreshShip(ship, classPrefix, computerRound){
         for(var k = 0; k < ship.length; k++, j++){
             if(((1 << k) & ship.hit) > 0)
                 $(classPrefix + i + '-' + j).css('background-color', color);
-            else if(computerRound){
+            else {
                 $(classPrefix + i + '-' + j).css('background-color', '#999966');
             }
         }
@@ -54,7 +61,7 @@ function refreshShip(ship, classPrefix, computerRound){
         for(var k = 0; k < ship.length; k++, i++){
             if(((1 << k) & ship.hit) > 0)
                 $(classPrefix + i + '-' + j).css('background-color', color);
-            else if(computerRound){
+            else {
                 $(classPrefix + i + '-' + j).css('background-color', '#999966');
             }
         }
@@ -113,8 +120,8 @@ $(function() {
           url: "/loadGame",
           type: "post",
           success: function(data){
-              refreshGameBoard(data['aiBoard'], '.computer-player .grid-cell-', false);
-              refreshGameBoard(data['playerBoard'], '.human-player .grid-cell-', true);
+              refreshComputerBoard(data['aiBoard'], '.computer-player .grid-cell-');
+              refreshPlayerBoard(data['playerBoard'], '.human-player .grid-cell-');
           }
       });
     });
@@ -133,7 +140,6 @@ $(function() {
         }
       }
     }
-    var cnt = 0;
     $(".computer-player .grid-cell").click(function() {
       var i = parseInt(this.getAttribute("data-x"));
       var j = parseInt(this.getAttribute("data-y"));
@@ -151,9 +157,6 @@ $(function() {
       addNewVote('me', pos);
       var mes = {'username':myname, 'pos':pos};
       socket.emit('newVote', mes);
-      cnt++;
-      if(cnt % 2 == 0)
-        gameFinish("lily");
     });
 
     $('#restart').click(function(){
@@ -164,7 +167,8 @@ $(function() {
           type: "post",
           success: function(data){
               recoverGameBoard();
-              refreshGameBoard(data['playerBoard'], '.human-player .grid-cell-', true);
+              refreshComputerBoard(data['aiBoard'], '.computer-player .grid-cell-');
+              refreshPlayerBoard(data['playerBoard'], '.human-player .grid-cell-');
           }
       });
     });

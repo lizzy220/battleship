@@ -77,8 +77,10 @@ app.post('/loadGame', function(req, res){
       init_game();
    }
    res.json({
+      'aiBoard': {'sunkPts': ai.aiBoard.sunkPts,
+                      'hitPts': ai.aiBoard.hitPts,
+                      'missPts': ai.aiBoard.missPts,},
       'playerBoard': ai.playerBoard,
-      'aiBoard': ai.aiBoard,
    })
 })
 //using this function to insert data to database
@@ -174,7 +176,9 @@ function playerTurn() {
     io.sockets.emit('newMove', {'name': "human", 'pos': playerMove});
     winner = ai.winner();
     if(winner != "") canStart = true;
-    return {'gameboard' : ai.aiBoard,
+    return {'gameboard' : {'sunkPts': ai.aiBoard.sunkPts,
+                          'hitPts': ai.aiBoard.hitPts,
+                          'missPts': ai.aiBoard.missPts,},
             'gameboardName' : 'computer-player',
             'winner': winner};
     // io.sockets.emit('message', data);
