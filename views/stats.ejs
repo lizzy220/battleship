@@ -9,8 +9,13 @@
     <script src="script.js"></script>
 
 </head>
+<<<<<<< HEAD
 <body> 
 <div style="text-align:center; padding-top: 20px">    
+=======
+<body>
+<div style="text-align:center">
+>>>>>>> e36756d5c145041f500eff8d9a3f34de645ce971
     <a href="/spectator" class="button">Home</a>
     <a href="/statistics" class="button">Statistics</a>
     <h1>Statistics</h1>
@@ -22,42 +27,17 @@
     <th>Human Accuracy</th>
     <th> Computer Accuracy</th>
   </tr>
-  <tr>
-    <td>data</td>
-    <td>data</td>
-    <td>data</td>
-    <td>data</td>
-  </tr>
-  <tr>
-    <td>data1</td>
-    <td>data1</td>
-    <td>data1</td>
-    <td>data1</td>
-  </tr>
-  <tr>
-    <td>data2</td>
-    <td>data2</td>
-    <td>data2</td>
-    <td>data2</td>
-  </tr>
-  <tr>
-    <td>data3</td>
-    <td>data3</td>
-    <td>data3</td>
-    <td>data3</td>
-  </tr>
-  <tr>
-    <td>data4</td>
-    <td>data4</td>
-    <td>data4</td>
-    <td>data4</td>
-  </tr>
-  <tr>
-    <td>data5</td>
-    <td>data5</td>
-    <td>data5</td>
-    <td>data5</td>
-  </tr>
+  <% for (var i = 0; i < results.length; i++) { %>
+      <tr>
+        <td><%= results[i].winner %></td>
+        <td><%= results[i].date %></td>
+        <td><%= results[i].human_accuracy %></td>
+        <td><%= results[i].computer_accuracy %></td>
+      </tr>
+  <% } %>
+</table>
+
+</div>
 </body>
 
 </html>

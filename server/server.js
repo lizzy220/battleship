@@ -5,6 +5,7 @@ var AI = require('./ai');
 // Everything that was in the file before goes here
 var express = require('express');
 app = express();
+app.set('view engine', 'ejs');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 var port = process.env.PORT || 3000; // For when we deploy to Heroku
@@ -42,7 +43,9 @@ app.get('/', function(req, res){
     })
 
 app.get('/statistics', function(req, res){
-    res.render('stats')
+    var results = getRecentGameStats();
+    console.log(results);
+    res.render('stats', {'results': results});
     })
 
 
@@ -90,8 +93,11 @@ function insertdb(collection, record){
 }
 
 function getRecentGameStats() {
-    var data = db.collection('GameResults').find();
-    return data;
+    var getResults = function(err, db) {
+        db.collection('GameResults').find();
+        db.clost();
+    }
+    return mongo.connect(getResults);
 }
 
 function vote(){
@@ -144,7 +150,7 @@ function turnBaseRoutine() {
             }
         }
         console.log("It's " + nextTurn + "'s turn to move")
-    }, 3000);
+    }, 1000);
 }
 
 function playerTurn() {
