@@ -38,12 +38,12 @@ app.get('/spectator', function(req, res){
     })
 
 app.get('/', function(req, res){
-
+         
     })
 
-//app.get('/statistics', function(req, res){
-//    res.render('stats')
-//    })
+app.get('/statistics', function(req, res){
+    res.render('stats')
+    })
 
 
 var io = require('socket.io').listen(server);
