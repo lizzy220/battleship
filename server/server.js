@@ -38,7 +38,7 @@ app.get('/spectator', function(req, res){
     })
 
 app.get('/', function(req, res){
-         
+
     })
 
 app.get('/statistics', function(req, res){
@@ -53,9 +53,9 @@ io.sockets.on('connection', function(socket){
     insertdb('userinfo', {'username':data});
 
   })
-  socket.on('newlog', function(data){
+  socket.on('newVote', function(data){
     // var mes = {'username': socket.username, 'pos': data};
-    socket.broadcast.emit('newlog', data);
+    socket.broadcast.emit('newVote', data);
   })
 })
 
@@ -135,7 +135,7 @@ function turnBaseRoutine() {
                 clearInterval(id);
             }
         }
-    }, 1500);
+    }, 3000);
 }
 
 function playerTurn() {
@@ -145,6 +145,7 @@ function playerTurn() {
         return null;
     }
     ai.hit(playerMove, ai.aiBoard);
+    io.sockets.emit('newMove', {'name': "human", 'pos': playerMove});
     winner = ai.winner();
     return {'gameboard' : ai.aiBoard,
             'gameboardName' : 'computer-player',
@@ -154,6 +155,7 @@ function playerTurn() {
 function computerTurn() {
     var nextMove = ai.aiNextMove();
     ai.hit(nextMove, ai.playerBoard);
+    io.sockets.emit('newMove', {'name': "computer", 'pos': nextMove});
     winner = ai.winner();
     return {'gameboard' : ai.playerBoard,
             'gameboardName' : 'human-player',

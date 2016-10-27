@@ -8,8 +8,12 @@ socket.on('message', function(data) {
     refreshGameBoard(gameboard, classPrefix, gameboardName == 'human-player');
 });
 
-socket.on('newlog', function(data){
-  addLog(data['username'], data['pos']);
+socket.on('newVote', function(data){
+  addNewVote(data['username'], data['pos']);
+});
+
+socket.on('newMove', function(data){
+  addNewMove(data['name'], data['pos']);
 });
 
 function refreshGameBoard(gameboard, classPrefix, computerRound){
@@ -52,13 +56,23 @@ function refreshShip(ship, classPrefix, computerRound){
     }
 }
 
-function addLog(name, pos){
+function addNewVote(name, pos){
   var i = Math.floor(pos/10);
   var j = pos % 10;
   var logbar = document.getElementById('log');
   var action = document.createElement('div');
   action.className = "log-entry";
   action.innerHTML =  '<b>' + name + '</b> vote: (' + i +',' + j +')';
+  logbar.insertBefore(action, logbar.childNodes[0]);
+}
+
+function addNewMove(name, pos){
+  var i = Math.floor(pos/10);
+  var j = pos % 10;
+  var logbar = document.getElementById('log');
+  var action = document.createElement('div');
+  action.className = "log-entry";
+  action.innerHTML =  '<b>' + name + '</b> hits: (' + i +',' + j +')';
   logbar.insertBefore(action, logbar.childNodes[0]);
 }
 
@@ -115,9 +129,9 @@ $(function() {
           }
       });
       var pos = i*10+j;
-      addLog('me', pos);
+      addNewVote('me', pos);
       var mes = {'username':myname, 'pos':pos};
-      socket.emit('newlog', mes);
+      socket.emit('newVote', mes);
     });
     //get the boat type
     var text = '0';
