@@ -1,5 +1,5 @@
 # Module 2 group project #
-__Submitted by:__ _team_name_
+__Submitted by:__ _nothingspecial_
 
 __Team members:__
 
@@ -13,10 +13,28 @@ __Team members:__
 __Heroku URL:__ https://thebattleship.herokuapp.com/
 
 __Argument of ambition:__
-_Briefly argue why this was a technically ambitious project_
+_Our project is aiming to complete a Battleship game which will let a team play with the computer.
+In order to play the game, players have to register a username and then start playing. All players will join
+the same game if a game has already started. 
+During a game session, all players in the team vote for the position to hit on the computer ship board. We will 
+keep a game log on the smae page to show real time votings. If one player executes spam voting, all other players 
+will find out.
+And on the human ship board, the grey block area shows the where the team's ships are, computer hit is implemented
+by an AI algorithm. 
+Spectator view provides the user to watch the game, but won't allow users to join the game.
+Statistics page provides the game history and the hit accuracy of both human and computer.
+We also try to maintain a clean and nice layout for our game which is completed in our css file._
 
 __Argument of execution:__
-_Briefly argue why this was a well executed project_
+_The game is insteresting and requires team cooperation. If different players open the game link and register their 
+username, they will either start a new game or join an ongoing game. Alert will show up if someone try to play the 
+game without registering. 
+Players have the ability to vote for the position to execute hitting. Different colors are used to indicate different 
+status of the ships on both boards. Green means miss hit, red means hit but not sink, black means sink.
+Computer plays well and wins human for some time, which indicating the AI algorithm excutes well.
+Spectator view also works well, if attempting to vote through spectator view, the attempt will fail. From the spectator
+view and try to play again, will leads players to register again.
+We can see all the game history through statistic page._
 
 ## Description ##
 For this module you will be making a multi-user, online game using Express,
