@@ -41,6 +41,11 @@ app.get('/', function(req, res){
 
     })
 
+//app.get('/statistics', function(req, res){
+//    res.render('stats')
+//    })
+
+
 var io = require('socket.io').listen(server);
 io.sockets.on('connection', function(socket){
   socket.on('username', function(data){ //insert username to db
