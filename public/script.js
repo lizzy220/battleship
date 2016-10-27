@@ -49,8 +49,9 @@ function addLog(name, pos){
   var j = pos % 10;
   var logbar = document.getElementById('log');
   var action = document.createElement('div');
-  action.innerHTML =  name + ' vote: (' + i +',' + j +')';
-  logbar.appendChild(action);
+  action.className = "log-entry";
+  action.innerHTML =  '<b>' + name + '</b> vote: (' + i +',' + j +')';
+  logbar.insertBefore(action, logbar.childNodes[0]);
 }
 
 $(function() {

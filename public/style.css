@@ -52,20 +52,31 @@ button:active {
 }
 
 .container {
-	width: 870px;
+	width: 60%;
 	text-align: center;
 	margin: 20px auto 100px auto;
 }
-.container {
+/*.container {
 	width: 440px;
-}
+}*/
 .grid-container:last-child {
 	margin-left: 0;
 }
 .game-container {
 	position: relative;
 }
-#left-sidebar, #right-sidebar, #restart-sidebar {
+#left-sidebar{
+	width: 200px;
+	padding: 20px;
+	margin: 0;
+	background-color: white;
+	position: absolute;
+	top: 4.5em;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+#right-sidebar{
 	width: 150px;
 	padding: 20px;
 	margin: 0;
@@ -80,7 +91,7 @@ button:active {
 	left: -200px;
 }
 #right-sidebar {
-	right: -200px;
+	right: -150px;
 }
 #left-sidebar h2, #right-sidebar h2, #restart-sidebar h2 {
 	margin: 0 0 1em 0;
@@ -175,9 +186,17 @@ button:active {
 	background-color: #808080;
 }
 .log{
-	width: 150px;
-	height: 400px;
-	border: 5px solid #666666;
-	border-radius: 5px;
+	/*width: 150px;
+	height: 400px;*/
+    min-height: 150px;
+    max-height: 500px;
+    text-align: left;
+	/*border: 5px solid #666666;
+	border-radius: 5px;*/
 	background-color: white;
+    overflow-y: auto;
+}
+.log-entry {
+    font-size: 1.2em;
+    font-family: 'Comic Sans MS'
 }
