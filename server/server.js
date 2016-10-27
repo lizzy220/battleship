@@ -38,19 +38,16 @@ app.get('/spectator', function(req, res){
     })
 
 app.get('/', function(req, res){
-
+         
     })
+
+app.get('/statistics', function(req, res){
+    res.render('stats')
+    })
+
 
 var io = require('socket.io').listen(server);
 io.sockets.on('connection', function(socket){
-    if(canStart) {
-        canStart = false;
-         init_game();
-     }else{
-        var data = {'gameboardName': 'computer-player',
-                    'gameboard' : ai.aiBoard,};
-         socket.emit('message', data);
-     }
   socket.on('username', function(data){ //insert username to db
     // socket.username = data;
     insertdb('userinfo', {'username':data});
@@ -62,32 +59,24 @@ io.sockets.on('connection', function(socket){
   })
 })
 
-// app.post('/setUsername', function(req,res){
-//     var name = req.body.username;
-//     if(name != ''){
-//       // console.log(req.body);
-//       var insertUser = function(err,db){
-//         db.collection('userinfo').insert({'username':name});
-//         db.close();
-//       }
-//       mongo.connect(insertUser);
-//       res.redirect('/spectator')
-//     }else{
-//       res.redirect('/register');
-//     }
-// });
-
-
 app.post('/hit', function(req,res){
     var location = req.body.location;
     votes[location]++;
-    // console.log(location);
-    // console.log(votes)
-    // console.log(votes[location]);
     res.json({
       'success':  true,
       'message':  req.body,
     })
+})
+
+app.post('/loadGame', function(req, res){
+  if(canStart) {
+      canStart = false;
+      init_game();
+   }
+   res.json({
+      'aiBoard': ai.aiBoard,
+      'playerBoard': ai.playerBoard,
+   })
 })
 //using this function to insert data to database
 //collection param is the collection you want to insert
@@ -117,7 +106,6 @@ function init_game(){
     ai = new AI();
     init_votes();
     nextTurn = 'player';
-    // setTurnBase();
     turnBaseRoutine();
 }
 
@@ -171,25 +159,4 @@ function computerTurn() {
             'gameboardName' : 'human-player',
             'winner': winner};
     // io.sockets.emit('message', data);
-}
-
-function setTurnBase(){
-  setInterval(function(){
-      // var voteLocation = vote();
-      // ai.hit(voteLocation, ai.aiBoard);
-      // var winner = ai.winner();
-      // var data = {'gameboard' : ai.aiBoard,
-      //             'gameboardName' : 'computer-player',
-      //             'winner': winner};
-      // io.sockets.emit('message', data);
-      // console.log('palyer');
-
-      var nextMove = ai.aiNextMove();
-      ai.hit(nextMove, ai.playerBoard);
-      winner = ai.winner();
-      data = {'gameboard' : ai.playerBoard,
-              'gameboardName' : 'human-player',
-              'winner': winner};
-      io.sockets.emit('message', data);
-  }, 50);
 }
