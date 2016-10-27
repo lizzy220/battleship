@@ -23,7 +23,7 @@ socket.on('systemMessage', function(data){
 });
 
 function refreshPlayerBoard(gameboard, classPrefix){
-  refreshMissHitsSunks(gameboard.missPts, classPrefix, '#99ff99');
+  refreshMissHitsSunks(gameboard.missPts, classPrefix, '#00e6ac');
   refreshShip(gameboard.destroyer, classPrefix);
   refreshShip(gameboard.submarine, classPrefix);
   refreshShip(gameboard.cruiser, classPrefix);
@@ -32,7 +32,7 @@ function refreshPlayerBoard(gameboard, classPrefix){
 }
 
 function refreshComputerBoard(computerBoard, classPrefix){
-    refreshMissHitsSunks(computerBoard['missPts'], classPrefix, '#99ff99');
+    refreshMissHitsSunks(computerBoard['missPts'], classPrefix, '#00e6ac');
     refreshMissHitsSunks(computerBoard['hitPts'], classPrefix, '#ff6666');
     refreshMissHitsSunks(computerBoard['sunkPts'], classPrefix, '#000000');
 }
@@ -54,7 +54,7 @@ function refreshShip(ship, classPrefix){
             if(((1 << k) & ship.hit) > 0)
                 $(classPrefix + i + '-' + j).css('background-color', color);
             else {
-                $(classPrefix + i + '-' + j).css('background-color', '#999966');
+                $(classPrefix + i + '-' + j).css('background-color', '#666699');
             }
         }
     }else{
@@ -62,7 +62,7 @@ function refreshShip(ship, classPrefix){
             if(((1 << k) & ship.hit) > 0)
                 $(classPrefix + i + '-' + j).css('background-color', color);
             else {
-                $(classPrefix + i + '-' + j).css('background-color', '#999966');
+                $(classPrefix + i + '-' + j).css('background-color', '#666699');
             }
         }
     }

@@ -2,7 +2,7 @@ tml, body {
 	width: 100%;
 	padding: 0;
 	margin: 0;
-	background-color: #99CCCC;
+	background-color: #3366cc;
 	min-width: 860px;
 }
 h1, h2, h3, h4, h5, h6, p, li, span {
@@ -162,7 +162,7 @@ button:active {
 	padding: 5px;
 	height: 420px;
 	width: 420px;
-	background-color: #666666;
+	background-color: #b3e6ff;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -183,7 +183,8 @@ button:active {
 	height: 40px;
 	width: 40px;
 	display: inline-block;
-	background-color: #FFFFCC;
+	background-color: #99ccff;
+
 	margin: 1px;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
