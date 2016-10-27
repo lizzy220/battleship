@@ -69,6 +69,8 @@ app.post('/setUsername', function(req,res){
 app.post('/hit', function(req,res){
     var location = req.body.location;
     votes[location]++;
+    // console.log(location);
+    // console.log(votes)
     // console.log(votes[location]);
     res.json({
       'success':  true,
@@ -89,8 +91,8 @@ io.sockets.on('connection', function (socket) {
 
 function vote(){
     var voteLocation = -1;
-    var maxVal = votes[0];
-    for(var i = 1; i < votes.length; i++){
+    var maxVal = 0;
+    for(var i = 0; i < votes.length; i++){
         if(maxVal < votes[i]){
           voteLocation = i;
           maxVal = votes[i];
@@ -103,14 +105,15 @@ function vote(){
 function init_game(){
     ai = new AI();
     init_votes();
-    nextTurn = 'player'
+    nextTurn = 'player';
     // setTurnBase();
     turnBaseRoutine();
 }
 
 function init_votes(){
-    for(var i = 0; i < 100; i++)
+    for(var i = 0; i < 100; i++) {
         votes[i] = 0;
+    }
 }
 
 function turnBaseRoutine() {
@@ -118,7 +121,8 @@ function turnBaseRoutine() {
         var result;
         if (nextTurn == 'player') {
             result = playerTurn();
-            if (result) {
+            console.log(result);
+            if (result != null) {
                 nextTurn = 'computer';
             }
         } else {
@@ -126,13 +130,13 @@ function turnBaseRoutine() {
             nextTurn = 'player';
         }
         console.log("It's " + nextTurn + "'s turn to move")
-        if (result) {
+        if (result != null) {
             io.sockets.emit('message', result);
             if (result['winner'] != "") {
                 clearInterval();
             }
         }
-    }, 1000*10);
+    }, 1000*5);
 }
 
 function playerTurn() {
