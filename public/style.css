@@ -54,9 +54,12 @@ button:active {
 }
 
 .register {
-	width: 800px;
+	width: 50%;
+    height: 20%;
 	text-align: center;
-	margin: 400px auto 100px auto;
+	margin: 10% auto 10% auto;
+    background-image: url('http://i.giphy.com/g32iHOVpKAvM4.gif');
+    background-size: cover;
 }
 
 #username {
@@ -65,9 +68,9 @@ button:active {
 }
 
 .container {
-	width: 60%;
+	width: 80%;
 	text-align: center;
-	margin: 20px auto 100px auto;
+	margin: 20px auto 100px 20%;
 }
 /*.container {
 	width: 440px;
@@ -79,7 +82,7 @@ button:active {
 	position: relative;
 }
 #left-sidebar{
-	width: 200px;
+	width: 20%;
 	padding: 20px;
 	margin: 0;
 	background-color: white;
@@ -101,7 +104,7 @@ button:active {
 	border-radius: 5px;
 }
 #left-sidebar, #restart-sidebar {
-	left: -200px;
+	left: -20%;
 }
 #right-sidebar {
 	right: -150px;
@@ -213,17 +216,19 @@ button:active {
     font-size: 1.2em;
     font-family: 'Comic Sans MS'
 }
-<<<<<<< Updated upstream
+
 
 table {
+    width: 100%;
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 td, th {
     border: 1px solid #dddddd;
-    text-align: left;
+    text-align: center;
     padding: 8px;
 }
 
@@ -232,9 +237,20 @@ tr:nth-child(even) {
 }
 
 .game-finish-info {
-		position: fixed;
+    position: fixed;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+.huge-title {
+    font-size: 5em;
+    font-family: 'Arial';
+    color: white;
+}
+.username_input {
+    font-size: 1em;
+    /*background-color:rgba(0, 0, 0, 0);*/
+    opacity: 0.8;
 }

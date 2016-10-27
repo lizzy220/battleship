@@ -6,8 +6,9 @@ __Team members:__
 - username@umn.edu
 - username@umn.edu
 - ...
+- grin0098@umn.edu
 
-__Heroku URL:__ _url_
+__Heroku URL:__ https://thebattleship.herokuapp.com/spectator
 
 __Argument of ambition:__
 _Briefly argue why this was a technically ambitious project_
