@@ -87,7 +87,7 @@ button:active {
 	margin: 0;
 	background-color: white;
 	position: absolute;
-	top: 4.5em;
+	top: 4em;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -204,8 +204,8 @@ button:active {
 .log{
 	/*width: 150px;
 	height: 400px;*/
-    min-height: 150px;
-    max-height: 500px;
+    min-height: 100px;
+    max-height: 350px;
     text-align: left;
 	/*border: 5px solid #666666;
 	border-radius: 5px;*/
