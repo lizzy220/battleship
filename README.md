@@ -6,7 +6,7 @@ __Team members:__
 - username@umn.edu
 - username@umn.edu
 - ...
-
+- grin0098@umn.edu
 __Heroku URL:__ _url_
 
 __Argument of ambition:__
