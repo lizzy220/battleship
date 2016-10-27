@@ -74,7 +74,7 @@ app.post('/hit', function(req,res){
 app.post('/loadGame', function(req, res){
   if(canStart) {
       canStart = false;
-      io.sockets.emit("systemMessage", "Starting New Game... ");
+      io.sockets.emit("systemMessage", "Starting New Game...");
       init_game();
    }
    res.json({
@@ -164,7 +164,7 @@ function turnBaseRoutine() {
             }
         }
         // console.log("It's " + nextTurn + "'s turn to move")
-    }, 1000 * 1);
+    }, 1000 * 2);
 }
 
 function playerTurn() {

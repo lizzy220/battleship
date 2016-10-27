@@ -19,6 +19,17 @@ socket.on('newMove', function(data){
 });
 
 socket.on('systemMessage', function(data){
+    if (data == 'Starting New Game...') {
+        $.ajax({
+            url: "/loadGame",
+            type: "post",
+            success: function(data){
+                recoverGameBoard();
+                refreshComputerBoard(data['aiBoard'], '.computer-player .grid-cell-');
+                refreshPlayerBoard(data['playerBoard'], '.human-player .grid-cell-');
+            }
+        });
+    }
   addSystemMessage(data);
 });
 

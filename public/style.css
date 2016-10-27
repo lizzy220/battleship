@@ -4,6 +4,8 @@ tml, body {
 	margin: 0;
 	background-color: #99b3e6;
 	min-width: 860px;
+    background-image: url('http://world-of-warships.pl/wp-content/uploads/4ba5fe40-2ef1-11e5-850f-ac162d8bc1e4.jpg');
+    background-size: cover;
 }
 h1, h2, h3, h4, h5, h6, p, li, span {
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -60,6 +62,8 @@ button:active {
 	margin: 10% auto 10% auto;
     background-image: url('http://i.giphy.com/g32iHOVpKAvM4.gif');
     background-size: cover;
+    border: none;
+    border-radius: 20px;
 }
 
 #username {
@@ -255,4 +259,6 @@ tr:nth-child(even) {
     font-size: 1em;
     /*background-color:rgba(0, 0, 0, 0);*/
     opacity: 0.8;
+    border: none;
+    border-radius: 5px;
 }
