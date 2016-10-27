@@ -43,9 +43,9 @@ app.get('/', function(req, res){
     })
 
 app.get('/statistics', function(req, res){
-    var retuls = getRecentGameStats();
+    var results = getRecentGameStats(res);
     console.log(results);
-    res.render('stats', {'results': results});
+    // res.render('stats', {'results': results});
     })
 
 
@@ -92,10 +92,21 @@ function insertdb(collection, record){
   mongo.connect(insertUser);
 }
 
-function getRecentGameStats() {
+function getRecentGameStats(res) {
     var getResults = function(err, db) {
-        db.collection('GameResults').find();
-        db.close();
+        db.collection('GameResults').find().toArray(function(err, result){
+            if (err) {
+                console.log(err);
+             } else if (result.length) {
+                console.log('Found:', result);
+                res.render('stats', {'results': result});
+             } else {
+                console.log('No document(s) found with defined "find" criteria!');
+                res.render('stats', {'results': []});
+             }
+             //Close connection
+             db.close();
+        });
     }
     return mongo.connect(getResults);
 }
