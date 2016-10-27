@@ -43,9 +43,18 @@ app.get('/', function(req, res){
 
 var io = require('socket.io').listen(server);
 io.sockets.on('connection', function(socket){
+    if(canStart) {
+        canStart = false;
+         init_game();
+     }else{
+        var data = {'gameboardName': 'computer-player',
+                    'gameboard' : ai.aiBoard,};
+         socket.emit('message', data);
+     }
   socket.on('username', function(data){ //insert username to db
     // socket.username = data;
     insertdb('userinfo', {'username':data});
+
   })
   socket.on('newlog', function(data){
     // var mes = {'username': socket.username, 'pos': data};
