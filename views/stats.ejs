@@ -9,9 +9,8 @@
     <script src="script.js"></script>
 
 </head>
-<<<<<<< HEAD
-<body> 
-<div>    
+<body>
+<div>
     <a href="/spectator" class="button">Home</a>
     <a href="/statistics" class="button">Statistics</a>
     <header>Statistics</header>
@@ -23,54 +22,14 @@
     <th>Human Accuracy</th>
     <th> Computer Accuracy</th>
   </tr>
-  <tr>
-    <td>data</td>
-    <td>data</td>
-    <td>data</td>
-    <td>data</td>
-  </tr>
-  <tr>
-    <td>data1</td>
-    <td>data1</td>
-    <td>data1</td>
-    <td>data1</td>
-  </tr>
-  <tr>
-    <td>data2</td>
-    <td>data2</td>
-    <td>data2</td>
-    <td>data2</td>
-  </tr>
-  <tr>
-    <td>data3</td>
-    <td>data3</td>
-    <td>data3</td>
-    <td>data3</td>
-  </tr>
-  <tr>
-    <td>data4</td>
-    <td>data4</td>
-    <td>data4</td>
-    <td>data4</td>
-  </tr>
-  <tr>
-    <td>data5</td>
-    <td>data5</td>
-    <td>data5</td>
-    <td>data5</td>
-  </tr>
-=======
-<body>
-
-<a href="/spectator" class="button">Home</a>
-<a href="/statistics" class="button">Statistics</a>
-<header>Statistics</header>
-<table>
-    <tr>
-    <th> Games Won <th>
-    <td><div></div></td>
-    </tr>
->>>>>>> 84c962c128f325e4f1f3b8560c1ca8d45979925e
+  <% for (var i = 0; i < results.length; i++) { %>
+      <tr>
+        <td><%= results[i].winner %></td>
+        <td><%= results[i].date %></td>
+        <td><%= results[i].human_accuracy %></td>
+        <td><%= results[i].computer_accuracy %></td>
+      </tr>
+  <% } %>
 </table>
 
 </div>
