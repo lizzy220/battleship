@@ -21,17 +21,16 @@ Expected output: Any information about AI board and player board like following
 
 
 __Command 2__
-curl --data "location = <the location you want to hit>"
-https://thebattleship.herokuapp.com/hit
-Usage: use this command to vote. In our game, when you want to hit a cell in the grid, you
+curl --data "location = <the location you want to hit>" https://thebattleship.herokuapp.com/hit<br />
+*Usage:* use this command to vote. In our game, when you want to hit a cell in the grid, you
 first need to vote, and then server will select the cell which is voted the most times. If
 you vote to hit the third row's sixth cell, location = (3 - 1) * 10 + (6 - 1),and this
 command will be:
 
 curl --data "location = 25" https://thebattleship.herokuapp.com/hit
 
-The expected output:
+*The expected output:*<br />
 {<br />
-  "success":true,                 //this means your vote is successful<br />
-  "message":{"location ":" 25"}   //this is the information about the cell you vote to hit<br />
+   "success":true,                 //this means your vote is successful<br />
+   "message":{"location ":" 25"}   //this is the information about the cell you vote to hit<br />
 }
