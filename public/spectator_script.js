@@ -103,6 +103,7 @@ function addSystemMessage(msg) {
 }
 
 $(function() {
+    $(".game-finish-info").hide();
     $.ajax({
           url: "/loadGame",
           type: "post",

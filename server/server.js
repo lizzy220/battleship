@@ -34,11 +34,11 @@ app.set('view engine', 'ejs')
 // app.get('/register', function(req, res){
 //       res.render('register')
 //     })
-app.get('/spectator', function(req, res){
+app.get('/', function(req, res){
       res.render('index')
     })
 
-app.get('/view', function(req, res){
+app.get('/spectator', function(req, res){
         res.render('spectator')
     })
 
@@ -164,7 +164,7 @@ function turnBaseRoutine() {
             }
         }
         console.log("It's " + nextTurn + "'s turn to move")
-    }, 1000 * 5);
+    }, 1000 * 1);
 }
 
 function playerTurn() {
