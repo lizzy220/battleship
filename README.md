@@ -5,7 +5,7 @@ __Team members:__
 
 - chen4656@umn.edu
 - grin0098@umn.edu
-- lixx3524@umnedu
+- lixx3524@umn.edu
 - nixxx169@umn.edu
 - tangx668@umn.edu
 
