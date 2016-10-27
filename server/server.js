@@ -156,7 +156,7 @@ function turnBaseRoutine() {
         if (result != null) {
             io.sockets.emit('message', result);
             if (result['winner'] != "") {
-                io.sockets.emit("systemMessage", "Game Over... " + winner + "is the winner!")
+                io.sockets.emit("systemMessage", "Game Over... " + winner + " is the winner!")
                 human_accuracy = ai.playerBoard.hits / ai.playerBoard.count;
                 computer_accuracy = ai.aiBoard.hits / ai.aiBoard.count;
                 insertdb('GameResults', {'winner': winner, 'date': ai.starttime, 'human_accuracy': human_accuracy, 'computer_accuracy': computer_accuracy});
