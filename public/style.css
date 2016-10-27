@@ -36,7 +36,7 @@ div {
 
 button {
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-	font-size: 1.2em;
+	font-size: 1.5em;
 	color: #EEEEEE;
 	background-color: #0099CC;
 	border: none;
@@ -54,9 +54,12 @@ button:active {
 }
 
 .register {
-	width: 800px;
+	width: 40%;
+    height: 30%;
 	text-align: center;
-	margin: 400px auto 100px auto;
+	margin: 10% auto 10% auto;
+    background-image: url('http://i.giphy.com/g32iHOVpKAvM4.gif');
+    background-size: cover;
 }
 
 #username {
@@ -213,7 +216,7 @@ button:active {
     font-size: 1.2em;
     font-family: 'Comic Sans MS'
 }
-<<<<<<< Updated upstream
+
 
 table {
     width: 100%;
@@ -232,10 +235,28 @@ td, th {
 tr:nth-child(even) {
     background-color: #FFFFCC;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 70cd908ec61e95873fc3296245a8812673ea5056
 .game-finish-info {
     position: fixed;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+<<<<<<< HEAD
+=======
+}
+
+.huge-title {
+    font-size: 5em;
+    font-family: 'Arial';
+    color: white;
+}
+.username_input {
+    font-size: 1.5em;
+    /*background-color:rgba(0, 0, 0, 0);*/
+    opacity: 0.8;
+>>>>>>> 70cd908ec61e95873fc3296245a8812673ea5056
 }
