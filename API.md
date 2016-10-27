@@ -31,7 +31,7 @@ command will be:
 curl --data "location = 25" https://thebattleship.herokuapp.com/hit
 
 The expected output:
-{
-  "success":true,                 //this means your vote is successful
-  "message":{"location ":" 25"}   //this is the information about the cell you vote to hit
+{<br />
+  "success":true,                 //this means your vote is successful<br />
+  "message":{"location ":" 25"}   //this is the information about the cell you vote to hit<br />
 }
