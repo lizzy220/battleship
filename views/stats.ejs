@@ -26,8 +26,8 @@
   <% for (var i = 0; i < results.length; i++) { %>
       <tr>
         <td><%= results[i].winner %></td>
-        <td><%= results[i].date %></td>
-        <td><%= results[i].human_accuracy %></td>
+        <td><%= Math.round(results[i].date / 31536000000)- 31 %> - </td>
+        <td><%= results[i].human_accuracy  %></td>
         <td><%= results[i].computer_accuracy %></td>
       </tr>
   <% } %>
