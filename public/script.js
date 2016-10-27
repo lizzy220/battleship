@@ -3,21 +3,23 @@ var socket = io.connect();
 socket.on('message', function(data) {
     var gameboardName = data['gameboardName'];
     var gameboard = data['gameboard'];
-
     //refresh the gameboard
     var classPrefix = '.' + gameboardName + ' ' + '.grid-cell-';
-    refreshMisses(gameboard, classPrefix);
-    refreshShip(gameboard.destroyer, classPrefix);
-    refreshShip(gameboard.submarine, classPrefix);
-    refreshShip(gameboard.cruiser, classPrefix);
-    refreshShip(gameboard.battleship, classPrefix);
-    refreshShip(gameboard.carrier, classPrefix);
-
+    refreshGameBoard(gameboard, classPrefix, gameboardName == 'human-player');
 });
 
 socket.on('newlog', function(data){
   addLog(data['username'], data['pos']);
 });
+
+function refreshGameBoard(gameboard, classPrefix, computerRound){
+  refreshMisses(gameboard, classPrefix);
+  refreshShip(gameboard.destroyer, classPrefix, computerRound);
+  refreshShip(gameboard.submarine, classPrefix, computerRound);
+  refreshShip(gameboard.cruiser, classPrefix, computerRound);
+  refreshShip(gameboard.battleship, classPrefix, computerRound);
+  refreshShip(gameboard.carrier, classPrefix, computerRound);
+}
 
 function refreshMisses(gameboard, classPrefix){
     for(var k in gameboard.misses){
@@ -27,7 +29,7 @@ function refreshMisses(gameboard, classPrefix){
       }
 }
 
-function refreshShip(ship, classPrefix){
+function refreshShip(ship, classPrefix, computerRound){
     var color = '#ff6666';
     if(ship.status == 'sunk') color = '#000000';
     var i = Math.floor(ship.position / 10), j = ship.position % 10;
@@ -35,11 +37,17 @@ function refreshShip(ship, classPrefix){
         for(var k = 0; k < ship.length; k++, j++){
             if(((1 << k) & ship.hit) > 0)
                 $(classPrefix + i + '-' + j).css('background-color', color);
+            else if(computerRound){
+                $(classPrefix + i + '-' + j).css('background-color', '#999966');
+            }
         }
     }else{
         for(var k = 0; k < ship.length; k++, i++){
             if(((1 << k) & ship.hit) > 0)
                 $(classPrefix + i + '-' + j).css('background-color', color);
+            else if(computerRound){
+                $(classPrefix + i + '-' + j).css('background-color', '#999966');
+            }
         }
     }
 }
@@ -67,6 +75,14 @@ $(function() {
       }else {
         alert('please enter a username!');
       }
+      $.ajax({
+          url: "/loadGame",
+          type: "post",
+          success: function(data){
+              refreshGameBoard(data['aiBoard'], '.computer-player .grid-cell-', false);
+              refreshGameBoard(data['playerBoard'], '.human-player .grid-cell-', true);
+          }
+      });
     });
     // draw the grid
     var gridDiv = document.querySelectorAll('.grid');
