@@ -1,4 +1,4 @@
-__Command 1__<br />
+###Command 1###<br />
 curl -X POST https://thebattleship.herokuapp.com/loadGame<br />
 **Usage:** When you need to start or restart a game, simply use the above command.<br />
 **Expected output:** Any information about AI board and player board like following<br />
@@ -20,7 +20,7 @@ curl -X POST https://thebattleship.herokuapp.com/loadGame<br />
 }
 
 
-__Command 2__<br />
+###Command 2###<br />
 curl --data "location = (the location you want to hit)" https://thebattleship.herokuapp.com/hit<br />
 **Usage:** use this command to vote. In our game, when you want to hit a cell in the grid, you
 first need to vote, and then server will select the cell which is voted the most times. If
