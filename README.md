@@ -17,7 +17,7 @@ _Our project is aiming to complete a Battleship game which will let a team play 
 In order to play the game, players have to register a username and then start playing. All players will join
 the same game if a game has already started.
 During a game session, all players in the team vote for the position to hit on the computer ship board. We will
-keep a game log on the smae page to show real time votings. If one player executes spam voting, all other players
+keep a game log on the same page to show real time votings. If one player executes spam voting, all other players
 will find out.
 And on the human ship board, the grey block area shows the where the team's ships are, computer hit is implemented
 by an AI algorithm.
