@@ -68,7 +68,7 @@ __Argument of execution:__
 - User join game
 
 In order to play the game, players have to set a username and then start playing. All players will join
-the same game if a game has already started.
+the same game, starting a new game or join an existing game if a game has already started.
 
 - Initial gameboard
 
